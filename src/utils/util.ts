@@ -2,7 +2,9 @@ import { isEmpty } from "lodash";
 import { HttpError } from "routing-controllers";
 
 export function validaLogin(req: any) {
-  const { login, senha, tipo } = req.header.user;
+  const { login, senha, tipo } = req.header;
+
+  console.log(req.header);
 
   if (!(isEmpty(login) || isEmpty(senha) || isEmpty(tipo))) {
     throw new HttpError(400, "Login incompleto");

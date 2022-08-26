@@ -6,8 +6,10 @@ import {
   Param,
   Post,
   Put,
+  UseBefore,
 } from "routing-controllers";
 import methCatequizando from "../methods/catequizando";
+import { validaLogin } from "../utils/util";
 
 @JsonController("/catequizando")
 export class CatequizandoController {
@@ -15,6 +17,7 @@ export class CatequizandoController {
   getManyBy() {}
 
   @Get("/:id")
+  //   @UseBefore(validaLogin)
   getOne(@Param("id") id: number) {
     return methCatequizando.getOne(id);
   }
