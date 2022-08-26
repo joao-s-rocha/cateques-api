@@ -2,6 +2,7 @@ import {
   IsDate,
   IsEnum,
   IsNotEmpty,
+  IsOptional,
   IsString,
   MaxLength,
   MinLength,
@@ -35,25 +36,28 @@ export class Catequizando {
   @IsNotEmpty({ message: "Este campo não pode estar vazio" })
   nome!: string;
 
-  @Column({ type: "char", enum: SimNao, default: SimNao.NAO })
+  @Column({ type: "char", default: SimNao.NAO, nullable: true })
   @MaxLength(1, { message: "Tamanho máximo para esse campo é de 1 caracter" })
   @MinLength(1, { message: "Tamanho máximo para esse campo é de 1 caracter" })
   @IsEnum(SimNao)
+  @IsOptional()
   todos_sac!: string;
 
-  @Column({ type: "char", enum: SimNao, default: SimNao.NAO })
+  @Column({ type: "char", default: SimNao.NAO, nullable: true })
   @MaxLength(1, { message: "Tamanho máximo para esse campo é de 1 caracter" })
   @MinLength(1, { message: "Tamanho máximo para esse campo é de 1 caracter" })
   @IsEnum(SimNao)
+  @IsOptional()
   padrinho!: string;
 
-  @Column({ type: "char", enum: SimNao, default: SimNao.NAO })
+  @Column({ type: "char", default: SimNao.NAO, nullable: true })
   @MaxLength(1, { message: "Tamanho máximo para esse campo é de 1 caracter" })
   @MinLength(1, { message: "Tamanho máximo para esse campo é de 1 caracter" })
   @IsEnum(SimNao)
+  @IsOptional()
   madrinha!: string;
 
-  @Column({ type: "char", enum: EstadoCivil, default: null })
+  @Column({ type: "char", default: null, nullable: true })
   @MaxLength(1, { message: "Tamanho máximo para esse campo é de 1 caracter" })
   @MinLength(1, { message: "Tamanho máximo para esse campo é de 1 caracter" })
   @IsEnum(EstadoCivil)
