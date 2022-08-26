@@ -1,4 +1,5 @@
 // import express from "express";
+import "reflect-metadata";
 import { db } from "./db";
 
 db.initialize()
