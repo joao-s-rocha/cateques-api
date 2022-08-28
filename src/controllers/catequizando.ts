@@ -23,7 +23,9 @@ export class CatequizandoController {
   }
 
   @Post()
-  postOne(@Body() cat: any) {}
+  postOne(@Body() cat: any) {
+    return methCatequizando.postOne(cat);
+  }
 
   @Put()
   putOne(@Body() cat: any) {}
