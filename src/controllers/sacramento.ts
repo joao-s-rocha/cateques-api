@@ -8,22 +8,22 @@ import {
   Put,
   UseBefore,
 } from "routing-controllers";
-import methCatequizando from "../methods/catequizando";
+import methSacramento from "../methods/sacramento";
 import { validaLogin } from "../utils/util";
 
-@JsonController("/catequizando")
-export class CatequizandoController {
+@JsonController("/sacramento")
+export class SacramentoController {
   @Get("/by")
   getManyBy() {}
 
   @Get("/:id")
-  getOne(@Param("id") id: number) {
-    return methCatequizando.getOne(id);
+  getByCatequizando(@Param("id") id: number) {
+    return methSacramento.getOne(id);
   }
 
   @Post()
   postOne(@Body() cat: any) {
-    return methCatequizando.postOne(cat);
+    return methSacramento.postOne(cat);
   }
 
   @Put()
