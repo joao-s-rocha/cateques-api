@@ -12,29 +12,31 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
+  ManyToOne,
   PrimaryGeneratedColumn,
 } from "typeorm";
+import { Catequizando } from "./catequizando";
 
 enum SimNao {
   SIM = "S",
   NAO = "N",
 }
 
-enum Sacramento {
+enum TipoSacramento {
   EUCARISTIA = "E",
   CRISMA = "C",
   BATISMO = "B",
 }
 
 @Entity({ name: "sacramento" })
-export class Catequizando {
+export class Sacramento {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @Column("varchar", { length: 120 })
-  @IsInt({ message: "Este campo recebe um inteiro" })
-  @IsNotEmpty({ message: "Este campo não pode estar vazio" })
-  pessoa_id!: string;
+  @ManyToOne((type) => Catequizando)
+  @JoinColumn({ referencedColumnName: "id" })
+  catequizando!: Catequizando;
 
   @Column({ type: "char", length: 1, default: SimNao.NAO, nullable: false })
   @MaxLength(1, { message: "Tamanho máximo para esse campo é de 1 caracter" })
@@ -46,7 +48,7 @@ export class Catequizando {
   @Column({ type: "char", length: 1, default: null, nullable: false })
   @MaxLength(1, { message: "Tamanho máximo para esse campo é de 1 caracter" })
   @MinLength(1, { message: "Tamanho máximo para esse campo é de 1 caracter" })
-  @IsEnum(Sacramento)
+  @IsEnum(TipoSacramento)
   @IsOptional()
   tipo_sacramento!: string;
 

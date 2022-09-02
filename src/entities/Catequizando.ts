@@ -11,8 +11,10 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from "typeorm";
+import { Sacramento } from "./sacramento";
 
 enum SimNao {
   SIM = "S",
