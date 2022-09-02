@@ -1,12 +1,15 @@
 import "reflect-metadata";
-import { createExpressServer } from "routing-controllers";
+import express from "express";
+import { useExpressServer } from "routing-controllers";
 import { db } from "./db";
 import { CatequizandoController } from "./controllers/catequizando";
 import bodyParser from "body-parser";
+import path from "path";
 
-// const app = express();
-const app = createExpressServer({
-  controllers: [CatequizandoController],
+const app = express();
+useExpressServer(app, {
+  routePrefix: "/api",
+  controllers: [path.join(__dirname + "/controllers/*.ts")],
 });
 
 db.initialize()
