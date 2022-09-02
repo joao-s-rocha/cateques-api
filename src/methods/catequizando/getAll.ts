@@ -6,7 +6,7 @@ const repository = db.getRepository(Catequizando);
 
 export async function getAll() {
   try {
-    return repository.find();
+    return await repository.find();
   } catch (err: any) {
     throw new HttpError(400, "Erro na busca");
   }

@@ -1,8 +1,6 @@
 import "reflect-metadata";
-import express from "express";
-import { useExpressServer } from "routing-controllers";
+import { createExpressServer } from "routing-controllers";
 import { db } from "./db";
-import { CatequizandoController } from "./controllers/catequizando";
 import bodyParser from "body-parser";
 import path from "path";
 
@@ -12,11 +10,11 @@ db.initialize()
   })
   .catch((error) => console.log(error));
 
-const app = express();
-app.use(bodyParser.json);
-useExpressServer(app, {
-  routePrefix: "/api",
-  controllers: [CatequizandoController],
-});
+// const app = express();
 
-app.listen(3000);
+const app = createExpressServer({
+  routePrefix: "/api",
+  controllers: [path.join(__dirname + "/controllers/*.ts")],
+});
+app.use(bodyParser.json);
+app.listen(3080);
