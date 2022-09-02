@@ -41,14 +41,14 @@ export class Sacramento {
   @Column({ type: "char", length: 1, default: SimNao.NAO, nullable: false })
   @MaxLength(1, { message: "Tamanho máximo para esse campo é de 1 caracter" })
   @MinLength(1, { message: "Tamanho máximo para esse campo é de 1 caracter" })
-  @IsEnum(SimNao)
+  @IsEnum(SimNao, { message: "Enum não correspondente" })
   @IsOptional()
   completo!: string;
 
   @Column({ type: "char", length: 1, default: null, nullable: false })
   @MaxLength(1, { message: "Tamanho máximo para esse campo é de 1 caracter" })
   @MinLength(1, { message: "Tamanho máximo para esse campo é de 1 caracter" })
-  @IsEnum(TipoSacramento)
+  @IsEnum(TipoSacramento, { message: "Enum não correspondente" })
   @IsOptional()
   tipo_sacramento!: string;
 

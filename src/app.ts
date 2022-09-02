@@ -6,17 +6,17 @@ import { CatequizandoController } from "./controllers/catequizando";
 import bodyParser from "body-parser";
 import path from "path";
 
-const app = express();
-useExpressServer(app, {
-  routePrefix: "/api",
-  controllers: [path.join(__dirname + "/controllers/*.ts")],
-});
-
 db.initialize()
   .then(() => {
     console.log("Catequese inicializado com sucesso");
   })
   .catch((error) => console.log(error));
 
+const app = express();
 app.use(bodyParser.json);
+useExpressServer(app, {
+  routePrefix: "/api",
+  controllers: [CatequizandoController],
+});
+
 app.listen(3000);

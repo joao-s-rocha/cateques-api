@@ -11,10 +11,8 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  OneToMany,
   PrimaryGeneratedColumn,
 } from "typeorm";
-import { Sacramento } from "./sacramento";
 
 enum SimNao {
   SIM = "S",
@@ -41,28 +39,28 @@ export class Catequizando {
   @Column({ type: "char", default: SimNao.NAO, nullable: true })
   @MaxLength(1, { message: "Tamanho máximo para esse campo é de 1 caracter" })
   @MinLength(1, { message: "Tamanho máximo para esse campo é de 1 caracter" })
-  @IsEnum(SimNao)
+  @IsEnum(SimNao, { message: "Enum não correspondente" })
   @IsOptional()
   todos_sac!: string;
 
   @Column({ type: "char", default: SimNao.NAO, nullable: true })
   @MaxLength(1, { message: "Tamanho máximo para esse campo é de 1 caracter" })
   @MinLength(1, { message: "Tamanho máximo para esse campo é de 1 caracter" })
-  @IsEnum(SimNao)
+  @IsEnum(SimNao, { message: "Enum não correspondente" })
   @IsOptional()
   padrinho!: string;
 
   @Column({ type: "char", default: SimNao.NAO, nullable: true })
   @MaxLength(1, { message: "Tamanho máximo para esse campo é de 1 caracter" })
   @MinLength(1, { message: "Tamanho máximo para esse campo é de 1 caracter" })
-  @IsEnum(SimNao)
+  @IsEnum(SimNao, { message: "Enum não correspondente" })
   @IsOptional()
   madrinha!: string;
 
   @Column({ type: "char", default: null, nullable: true })
   @MaxLength(1, { message: "Tamanho máximo para esse campo é de 1 caracter" })
   @MinLength(1, { message: "Tamanho máximo para esse campo é de 1 caracter" })
-  @IsEnum(EstadoCivil)
+  @IsEnum(EstadoCivil, { message: "Enum não correspondente" })
   estado_civil!: string;
 
   @Column("date")

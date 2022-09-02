@@ -6,6 +6,7 @@ import {
   Param,
   Post,
   Put,
+  QueryParams,
   UseBefore,
 } from "routing-controllers";
 import methCatequizando from "../methods/catequizando";
@@ -13,8 +14,16 @@ import { validaLogin } from "../utils/util";
 
 @JsonController("/catequizando")
 export class CatequizandoController {
-  @Get("/by")
-  getManyBy() {}
+  @Get()
+  getAll() {
+    // if (isNull(param) || isEmpty(param)) {
+
+    // }
+
+    return methCatequizando.getAll();
+
+    // return methSacramento.getBy(param);
+  }
 
   @Get("/:id")
   getOne(@Param("id") id: number) {
