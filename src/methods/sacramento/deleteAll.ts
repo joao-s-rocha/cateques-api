@@ -4,10 +4,10 @@ import { Sacramento } from "../../entities/sacramento";
 
 const repository = db.getRepository(Sacramento);
 
-export async function getAll() {
+export async function deleteAll() {
   try {
-    return repository.find({ relations: { catequizando: true } });
+    return repository.delete({});
   } catch (err: any) {
-    throw new HttpError(400, "Erro na busca");
+    throw new HttpError(400, "Erro ao excluir");
   }
 }

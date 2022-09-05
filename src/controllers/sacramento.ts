@@ -73,6 +73,8 @@ export class SacramentoController {
   @Put()
   putOne(@Body() cat: any) {}
 
-  @Delete("/:id")
-  deleteOne(@Param("id") id: number) {}
+  @Delete()
+  deleteOne() {
+    return methSacramento.deleteAll();
+  }
 }

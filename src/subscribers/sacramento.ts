@@ -56,14 +56,14 @@ export class PostSubscriber implements EntitySubscriberInterface<Sacramento> {
         break;
     }
 
-    if (!(message == "")) throw new HttpError(500, message);
+    if (!(message == "")) throw message;
   }
 
   async beforeUpdate(event: UpdateEvent<Sacramento>) {
     //   await validate(event.entity as Sacramento);
   }
 
-  async afterLoad(entity: any) {
-    entity.cliente = entity.cliente.cnpjCpf;
-  }
+  // async afterLoad(entity: any) {
+  //   entity.cliente = entity.cliente.cnpjCpf;
+  // }
 }
