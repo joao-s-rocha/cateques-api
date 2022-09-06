@@ -69,8 +69,8 @@ export class SacramentoController {
 
   @Post()
   @UseBefore(validaLogin)
-  postOne(@Body() cat: any) {
-    return methSacramento.postOne(cat);
+  postOne(@Body() sac: any) {
+    return methSacramento.postOne(sac);
   }
 
   @Put()
