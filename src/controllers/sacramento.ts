@@ -16,8 +16,10 @@ import {
   Post,
   Put,
   QueryParams,
+  UseBefore,
 } from "routing-controllers";
 import methSacramento from "../methods/sacramento";
+import { validaLogin } from "../utils/validaLogin";
 
 enum SimNao {
   SIM = "S",
@@ -66,6 +68,7 @@ export class SacramentoController {
   }
 
   @Post()
+  @UseBefore(validaLogin)
   postOne(@Body() cat: any) {
     return methSacramento.postOne(cat);
   }

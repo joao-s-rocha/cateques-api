@@ -10,7 +10,7 @@ import {
   UseBefore,
 } from "routing-controllers";
 import methCatequizando from "../methods/catequizando";
-import { validaLogin } from "../utils/util";
+// import { validaLogin } from "../utils/validaLogin";
 
 @JsonController("/catequizando")
 export class CatequizandoController {
