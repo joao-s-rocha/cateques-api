@@ -1,3 +1,4 @@
+import { isArray, isEmpty, isNull } from "lodash";
 import {
   Body,
   Delete,
@@ -15,14 +16,12 @@ import methCatequizando from "../methods/catequizando";
 @JsonController("/catequizando")
 export class CatequizandoController {
   @Get()
-  getAll() {
-    // if (isNull(param) || isEmpty(param)) {
+  getAll(@QueryParams() param: any) {
+    if (isNull(param) || isEmpty(param)) {
+      return methCatequizando.getAll();
+    }
 
-    // }
-
-    return methCatequizando.getAll();
-
-    // return methSacramento.getBy(param);
+    return methCatequizando.getBy(param);
   }
 
   @Get("/:id")
@@ -31,8 +30,10 @@ export class CatequizandoController {
   }
 
   @Post()
-  postOne(@Body() cat: any) {
-    return methCatequizando.postOne(cat);
+  postOne(@QueryParams() param: any, @Body() cat: any) {
+    return isArray(cat)
+      ? methCatequizando.postOne(cat)
+      : methCatequizando.postOne(cat);
   }
 
   @Put()

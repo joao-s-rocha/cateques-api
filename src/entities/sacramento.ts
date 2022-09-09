@@ -38,13 +38,6 @@ export class Sacramento {
   @JoinColumn({ referencedColumnName: "id" })
   catequizando!: Catequizando;
 
-  @Column({ type: "enum", enum: SimNao, default: SimNao.NAO, nullable: false })
-  @MaxLength(1, { message: "Tamanho máximo para esse campo é de 1 caracter" })
-  @MinLength(1, { message: "Tamanho máximo para esse campo é de 1 caracter" })
-  @IsEnum(SimNao, { message: "Enum não correspondente" })
-  @IsOptional()
-  completo!: SimNao;
-
   @Column({ type: "enum", enum: TipoSacramento, nullable: false })
   @MaxLength(1, { message: "Tamanho máximo para esse campo é de 1 caracter" })
   @MinLength(1, { message: "Tamanho máximo para esse campo é de 1 caracter" })
