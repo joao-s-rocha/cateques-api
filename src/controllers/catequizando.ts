@@ -15,8 +15,8 @@ import methCatequizando from "../methods/catequizando";
 
 @JsonController("/catequizando")
 export class CatequizandoController {
-  @Get()
-  getAll(@QueryParams() param: any) {
+  @Get("/")
+  getAll(@Param("oi") param: any) {
     if (isNull(param) || isEmpty(param)) {
       return methCatequizando.getAll();
     }
@@ -29,14 +29,14 @@ export class CatequizandoController {
     return methCatequizando.getOne(id);
   }
 
-  @Post()
-  postOne(@QueryParams() param: any, @Body() cat: any) {
+  @Post("/")
+  postOne(@Param("oi") param: any, @Body() cat: any) {
     return isArray(cat)
       ? methCatequizando.postOne(cat)
       : methCatequizando.postOne(cat);
   }
 
-  @Put()
+  @Put("/")
   putOne(@Body() cat: any) {}
 
   @Delete("/:id")
