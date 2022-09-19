@@ -8,15 +8,15 @@ import {
   Post,
   Put,
   QueryParams,
-  UseBefore,
 } from "routing-controllers";
+import { Catequizando } from "../entities/catequizando";
 import methCatequizando from "../methods/catequizando";
 // import { validaLogin } from "../utils/validaLogin";
 
 @JsonController("/catequizando")
 export class CatequizandoController {
   @Get("/")
-  getAll(@Param("oi") param: any) {
+  getAll(@QueryParams() param: Catequizando) {
     if (isNull(param) || isEmpty(param)) {
       return methCatequizando.getAll();
     }
@@ -30,7 +30,7 @@ export class CatequizandoController {
   }
 
   @Post("/")
-  postOne(@Param("oi") param: any, @Body() cat: any) {
+  postOne(@Body() cat: any) {
     return isArray(cat)
       ? methCatequizando.postOne(cat)
       : methCatequizando.postOne(cat);

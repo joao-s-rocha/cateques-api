@@ -7,13 +7,10 @@ export class validaLogin implements ExpressMiddlewareInterface {
     const senha = req.headers.senha;
     const tipo = req.headers.tipo;
 
-    if (isEmpty(usuario) || isEmpty(senha) || isEmpty(tipo)) {
-      console.log("exceção 2");
+    if (isEmpty(usuario) || isEmpty(senha) || isEmpty(tipo))
       throw new HttpError(400, "Login incompleto");
-    }
 
     if (!(usuario == "admin" && senha == "catequese" && tipo == "A")) {
-      console.log("exceção 3");
       throw new HttpError(500, "Login inválido");
     }
     next();
