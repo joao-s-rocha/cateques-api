@@ -105,4 +105,4 @@ Para corrigir isso, basta que em todas chamadas deste caminho, substitua `/cateq
 
 Foi criado um arquivo em _swagger_ para consultar facilmente a estrutura das requisições.
 
-Para acessa-lo basta entrarmos na URL: http://localhost:3000/docs/
+Para acessa-lo basta entrarmos na URL: http://localhost:3000/docs/ com a API já inicializado com o comando `npm run dev`.
