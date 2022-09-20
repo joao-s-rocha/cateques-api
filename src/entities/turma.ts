@@ -15,7 +15,7 @@ import {
   Unique,
 } from "typeorm";
 // import { Catequizando } from "./catequizando";
-//   import { Catequizando } from "./catequizando";
+// import { Catequizando } from "./catequizando";
 
 enum TipoSacramento {
   EUCARISTIA = "E",

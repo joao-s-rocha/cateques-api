@@ -1,7 +1,6 @@
 import {
   IsDate,
   IsEnum,
-  IsInt,
   IsNotEmpty,
   IsOptional,
   IsString,
@@ -15,17 +14,19 @@ import {
   JoinColumn,
   ManyToOne,
   PrimaryGeneratedColumn,
+  Unique,
 } from "typeorm";
 import { Catequizando } from "./catequizando";
+import { Turma } from "./turma";
 
-enum TipoSacramento {
-  EUCARISTIA = "E",
-  CRISMA = "C",
-  BATISMO = "B",
+enum Status {
+  ATIVO = "A",
+  DESISTENTE = "D",
 }
 
-@Entity({ name: "sacramento" })
-export class Sacramento {
+@Entity({ name: "turma_catequizando" })
+@Unique("UQ_CATEQUIZANDO_TURMA", ["catequizando", "turma"])
+export class TurmaCatequizando {
   @PrimaryGeneratedColumn()
   id!: number;
 
@@ -33,20 +34,22 @@ export class Sacramento {
   @JoinColumn({ referencedColumnName: "id" })
   catequizando!: Catequizando;
 
-  @Column({ type: "enum", enum: TipoSacramento, nullable: false })
+  @ManyToOne((type) => Turma)
+  @JoinColumn({ referencedColumnName: "id" })
+  turma!: Turma;
+
+  @Column({ type: "enum", enum: Status, nullable: false })
   @MaxLength(1, { message: "Tamanho máximo para esse campo é de 1 caracter" })
   @MinLength(1, { message: "Tamanho máximo para esse campo é de 1 caracter" })
-  @IsEnum(TipoSacramento, { message: "Enum não correspondente" })
+  @IsEnum(Status, { message: "Enum não correspondente" })
   @IsNotEmpty()
-  tipo_sacramento!: string;
+  status!: string;
 
   @Column({ type: "date", nullable: false })
   @IsDate()
   @IsNotEmpty()
-  data_inicio!: Date;
+  data_desistencia!: Date;
 
-  @Column({ type: "date", nullable: true })
-  @IsDate()
-  @IsOptional()
-  data_fechamento!: Date;
+  @CreateDateColumn()
+  data_cad!: Date;
 }
