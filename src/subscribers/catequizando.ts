@@ -22,7 +22,7 @@ export class PostSubscriber implements EntitySubscriberInterface<Catequizando> {
     await validate(event.entity as Catequizando);
   }
 
-  async afterLoad(entity: any) {
-    entity.cliente = entity.cliente.cnpjCpf;
-  }
+  // async afterLoad(entity: any) {
+  //   entity.cliente = entity.cliente.cnpjCpf;
+  // }
 }

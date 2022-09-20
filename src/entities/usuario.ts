@@ -19,7 +19,7 @@ enum TipoUsuario {
 }
 
 @Entity({ name: "usuario" })
-@Unique("UQ_USUARIO", ["login", "senha"])
+@Unique("UQ_USUARIO", ["login"])
 export class Usuario {
   @PrimaryGeneratedColumn()
   id!: number;
