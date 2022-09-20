@@ -1,16 +1,13 @@
 import {
   IsDate,
   IsEnum,
-  IsInt,
   IsNotEmpty,
   IsOptional,
-  IsString,
   MaxLength,
   MinLength,
 } from "class-validator";
 import {
   Column,
-  CreateDateColumn,
   Entity,
   JoinColumn,
   ManyToOne,
