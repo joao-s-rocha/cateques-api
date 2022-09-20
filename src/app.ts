@@ -34,8 +34,6 @@ const schemas = validationMetadatasToSchemas({
   refPointerPrefix: "#/components/schemas/",
 });
 
-console.log(routingControllersOptions);
-
 const storage = getMetadataArgsStorage();
 const spec = routingControllersToSpec(storage, routingControllersOptions, {
   components: {
