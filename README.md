@@ -1,4 +1,4 @@
-##API de Catequese
+## API de Catequese
 
 ### 1. Instruções para instalação de back-end
 
