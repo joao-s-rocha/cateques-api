@@ -36,7 +36,7 @@ export class PostSubscriber implements EntitySubscriberInterface<Usuario> {
     await validate(event.entity as Usuario);
   }
 
-  async afterLoad(entity: any) {
-    entity.cliente = entity.cliente.cnpjCpf;
-  }
+  // async afterLoad(entity: any) {
+  //   entity.cliente = entity.cliente.cnpjCpf;
+  // }
 }

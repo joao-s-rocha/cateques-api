@@ -1,4 +1,3 @@
-import { isArray, isEmpty, isNull } from "lodash";
 import {
   Body,
   Delete,
@@ -7,19 +6,18 @@ import {
   Param,
   Post,
   Put,
-  QueryParams,
 } from "routing-controllers";
 import methUsuario from "../methods/usuario";
 
 @JsonController("/usuario")
 export class UsuarioController {
   @Get("/")
-  getAll(@QueryParams() param: any) {
-    if (isNull(param) || isEmpty(param)) {
-      return methUsuario.getAll();
-    }
+  getAll() {
+    return methUsuario.getAll();
 
-    return methUsuario.getBy(param);
+    // TO-DO
+    // if (!(isNull(param) || isEmpty(param)))
+    // return methUsuario.getBy(param);
   }
 
   @Get("/:id")
@@ -28,13 +26,22 @@ export class UsuarioController {
   }
 
   @Post("/")
-  postOne(@Body() cat: any) {
-    return methUsuario.post(cat);
+  postOne(@Body() usr: any) {
+    return methUsuario.post(usr);
   }
 
-  @Put("/")
-  putOne(@Body() cat: any) {}
+  @Put("/:id")
+  putOne(@Param("id") id: number, @Body() usr: any) {
+    return methUsuario.putOne(id, usr);
+  }
 
   @Delete("/:id")
-  deleteOne(@Param("id") id: number) {}
+  deleteOne(@Param("id") id: number) {
+    return methUsuario.deleteOne(id);
+  }
+
+  @Delete("/")
+  deleteAll() {
+    return methUsuario.deleteAll();
+  }
 }
