@@ -11,13 +11,13 @@ import { useExpressServer, getMetadataArgsStorage } from "routing-controllers";
 import * as swaggerUiExpress from "swagger-ui-express";
 import { defaultMetadataStorage } from "class-transformer/storage";
 
-import { SacramentoController } from "./controllers/sacramento";
-import { CatequizandoController } from "./controllers/catequizando";
-// import { Sacramento } from "./entities/sacramento";
-// import { Catequizando } from "./entities/catequizando";
+// import { SacramentoController } from "./controllers/sacramento";
+// import { CatequizandoController } from "./controllers/catequizando";
+import { TurmaController } from "./controllers/turma";
+import { UsuarioController } from "./controllers/usuario";
 
 const routingControllersOptions = {
-  controllers: [CatequizandoController],
+  controllers: [TurmaController, UsuarioController],
   routePrefix: "/api",
 };
 

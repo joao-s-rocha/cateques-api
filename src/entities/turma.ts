@@ -43,11 +43,6 @@ export class Turma {
   @IsNotEmpty()
   tipo_sacramento!: string;
 
-  @Column({ type: "date", nullable: false })
-  @IsDate()
-  @IsNotEmpty()
-  data_inicio!: Date;
-
   @Column({ type: "date", nullable: true })
   @IsDate()
   @IsOptional()
