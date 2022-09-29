@@ -10,7 +10,11 @@ https://nodejs.org/en/download/
 
 #### 1.2. MySQL
 
-Utilizamos o SGBD MySQL, e deve ser utilizada sua imagem em docker ou sua intalação padrão.
+Utilizamos o SGBD MySQL, e deve ser utilizada sua imagem em docker ou sua instalação padrão.
+
+O executável para instalação pode ser encontrado no seguinte link:
+
+https://dev.mysql.com/downloads/installer/
 
 #### 1.3. Clonando repositório e instalando módulos
 

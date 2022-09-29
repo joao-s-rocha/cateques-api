@@ -11,7 +11,6 @@ import {
 } from "routing-controllers";
 import { Catequizando } from "../entities/catequizando";
 import methCatequizando from "../methods/catequizando";
-// import { validaLogin } from "../utils/validaLogin";
 
 @JsonController("/catequizando")
 export class CatequizandoController {
