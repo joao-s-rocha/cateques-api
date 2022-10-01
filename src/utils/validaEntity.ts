@@ -1,4 +1,5 @@
 import { validateOrReject } from "class-validator";
+import { CustomError } from "./customError";
 
 export async function validate(obj: Object) {
   await validateOrReject(obj).catch((errors) => {
@@ -7,6 +8,6 @@ export async function validate(obj: Object) {
         result.push({ value: value, errors: constraints }) && result,
       []
     );
-    throw err;
+    throw new CustomError(400, "Erro na validação da classe", err);
   });
 }

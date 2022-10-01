@@ -1,8 +1,7 @@
-import { HttpError } from "routing-controllers";
-import { Repository } from "typeorm";
 import { db } from "../../db";
 import { Catequizando } from "../../entities/catequizando";
 import { Sacramento } from "../../entities/sacramento";
+import { CustomError } from "../../utils/customError";
 
 const repository = db.getRepository(Sacramento);
 const repCatequizando = db.getRepository(Catequizando);
@@ -17,6 +16,6 @@ export async function postOne(sac: any) {
   } catch (err: any) {
     console.log(err);
 
-    throw new HttpError(400, "Registro inválido");
+    throw new CustomError(400, "Registro inválido");
   }
 }

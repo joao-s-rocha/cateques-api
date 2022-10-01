@@ -14,8 +14,8 @@ import {
 } from "typeorm";
 
 enum TipoUsuario {
-  COORDENADOR = "COORD",
-  CATEQUISTA = "CAT",
+  COORDENADOR = "COORDENADOR",
+  CATEQUISTA = "CATEQUISTA",
 }
 
 @Entity({ name: "usuario" })
@@ -41,8 +41,12 @@ export class Usuario {
   senha!: string;
 
   @Column({ type: "enum", enum: TipoUsuario, nullable: false })
-  @MaxLength(5, { message: "Tamanho máximo para esse campo é de 5 caracter" })
-  @MinLength(3, { message: "Tamanho máximo para esse campo é de 3 caracter" })
+  @MaxLength(11, {
+    message: "Tamanho máximo para esse campo é de 11 caracteres",
+  })
+  @MinLength(10, {
+    message: "Tamanho mínimo para esse campo é de 10 caracteres",
+  })
   @IsEnum(TipoUsuario, { message: "Enum não correspondente" })
   @IsNotEmpty()
   tipo!: string;

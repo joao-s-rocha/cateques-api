@@ -1,5 +1,5 @@
 import { isEmpty, isNull } from "lodash";
-import { HttpError } from "routing-controllers";
+import { CustomError } from "../../utils/customError";
 import { db } from "../../db";
 import { Turma } from "../../entities/turma";
 
@@ -9,7 +9,7 @@ export async function putOne(id: number, usr: any) {
   const usuario = await repository.findOneBy({ id });
 
   if (isEmpty(usuario) || isNull(usuario)) {
-    throw new HttpError(404, "Usuário não encontrado");
+    throw new CustomError(404, "Usuário não encontrado");
   }
 
   try {
@@ -17,6 +17,6 @@ export async function putOne(id: number, usr: any) {
       repository.merge(usuario as Turma, usr as Turma)
     );
   } catch (err: any) {
-    throw new HttpError(400, "Falha na requisição de modificação");
+    throw new CustomError(400, "Falha na requisição de modificação");
   }
 }

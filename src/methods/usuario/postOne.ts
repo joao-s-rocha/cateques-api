@@ -1,4 +1,4 @@
-import { HttpError } from "routing-controllers";
+import { CustomError } from "../../utils/customError";
 import { db } from "../../db";
 import { Catequizando } from "../../entities/catequizando";
 
@@ -8,6 +8,6 @@ export async function postOne(cat: any) {
   try {
     return repository.save(repository.create(cat));
   } catch (err: any) {
-    throw new HttpError(400, "Registro inválido");
+    throw new CustomError(400, "Registro inválido");
   }
 }

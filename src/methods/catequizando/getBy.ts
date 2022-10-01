@@ -1,8 +1,7 @@
-import { isEmpty, isNull } from "lodash";
-import { HttpError } from "routing-controllers";
 import { Like } from "typeorm";
 import { db } from "../../db";
 import { Catequizando } from "../../entities/catequizando";
+import { CustomError } from "../../utils/customError";
 
 const repository = db.getRepository(Catequizando);
 
@@ -32,6 +31,6 @@ export async function getBy(where: any) {
       },
     });
   } catch (err: any) {
-    throw new HttpError(400, "Erro na busca");
+    throw new CustomError(400, "Erro na busca");
   }
 }

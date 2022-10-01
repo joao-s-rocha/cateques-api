@@ -1,5 +1,5 @@
 import { isEmpty, isNull } from "lodash";
-import { HttpError } from "routing-controllers";
+import { CustomError } from "../../utils/customError";
 import { Like } from "typeorm";
 import { db } from "../../db";
 import { Usuario } from "../../entities/usuario";
@@ -32,6 +32,6 @@ export async function getBy(where: any) {
       },
     });
   } catch (err: any) {
-    throw new HttpError(400, "Erro na busca");
+    throw new CustomError(400, "Erro na busca");
   }
 }

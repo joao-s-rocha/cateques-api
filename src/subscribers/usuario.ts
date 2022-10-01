@@ -1,5 +1,4 @@
 import { isEmpty, isNull } from "lodash";
-import { HttpError } from "routing-controllers";
 import {
   Entity,
   EntitySubscriberInterface,
@@ -9,6 +8,7 @@ import {
 } from "typeorm";
 import { db } from "../db";
 import { Usuario } from "../entities/usuario";
+import { CustomError } from "../utils/customError";
 import { validate } from "../utils/validaEntity";
 
 const repository = db.getRepository(Usuario);
@@ -27,7 +27,7 @@ export class PostSubscriber implements EntitySubscriberInterface<Usuario> {
         !(isEmpty(coordenador) || isNull(coordenador)) &&
         event.entity.tipo === "COORD"
       )
-        throw new HttpError(400, "Coordenador já cadastrado");
+        throw new CustomError(400, "Coordenador já cadastrado");
     }
     await validate(event.entity);
   }

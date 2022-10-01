@@ -1,4 +1,4 @@
-import { HttpError } from "routing-controllers";
+import { CustomError } from "../../utils/customError";
 import { Repository } from "typeorm";
 import { db } from "../../db";
 import { Usuario } from "../../entities/usuario";
@@ -9,6 +9,6 @@ export async function getOne(id: number) {
   try {
     return repository.findOneBy({ id });
   } catch (err: any) {
-    throw new HttpError(400, "Usuário não encontrado");
+    throw new CustomError(400, "Usuário não encontrado");
   }
 }

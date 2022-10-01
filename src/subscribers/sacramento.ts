@@ -1,5 +1,4 @@
 import { findIndex } from "lodash";
-import { HttpError } from "routing-controllers";
 import {
   EntitySubscriberInterface,
   EventSubscriber,

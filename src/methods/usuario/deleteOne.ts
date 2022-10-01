@@ -1,4 +1,4 @@
-import { HttpError } from "routing-controllers";
+import { CustomError } from "../../utils/customError";
 import { db } from "../../db";
 import { Usuario } from "../../entities/usuario";
 
@@ -8,6 +8,6 @@ export async function deleteOne(id: number) {
   try {
     return repository.delete({ id });
   } catch (err: any) {
-    throw new HttpError(400, "Erro na requisição");
+    throw new CustomError(400, "Erro na requisição");
   }
 }

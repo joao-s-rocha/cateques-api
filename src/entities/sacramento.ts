@@ -26,7 +26,10 @@ export class Sacramento {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @ManyToOne((type) => Catequizando)
+  @ManyToOne((type) => Catequizando, {
+    onDelete: "CASCADE",
+    onUpdate: "CASCADE",
+  })
   @JoinColumn({ referencedColumnName: "id" })
   catequizando!: Catequizando;
 

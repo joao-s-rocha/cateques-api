@@ -15,9 +15,15 @@ import { defaultMetadataStorage } from "class-transformer/storage";
 import { CatequizandoController } from "./controllers/catequizando";
 import { TurmaController } from "./controllers/turma";
 import { UsuarioController } from "./controllers/usuario";
+import { TurmaCatequistaController } from "./controllers/turmaCatequista";
 
 const routingControllersOptions = {
-  controllers: [TurmaController, UsuarioController, CatequizandoController],
+  controllers: [
+    TurmaController,
+    TurmaCatequistaController,
+    UsuarioController,
+    CatequizandoController,
+  ],
   routePrefix: "/api",
 };
 
