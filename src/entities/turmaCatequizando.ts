@@ -11,6 +11,7 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
+  OneToOne,
   PrimaryGeneratedColumn,
   Unique,
 } from "typeorm";
@@ -28,11 +29,11 @@ export class TurmaCatequizando {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @ManyToOne((type) => Catequizando)
+  @OneToOne((type) => Catequizando)
   @JoinColumn({ referencedColumnName: "id" })
   catequizando!: Catequizando;
 
-  @ManyToOne((type) => Turma)
+  @OneToOne((type) => Turma)
   @JoinColumn({ referencedColumnName: "id" })
   turma!: Turma;
 

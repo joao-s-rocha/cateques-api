@@ -21,7 +21,7 @@ import { Turma } from "./turma";
 
 @Entity({ name: "turma_catequista" })
 @Unique("UQ_CATEQUISTA_TURMA", ["usuario", "turma"])
-export class TurmaCatequizando {
+export class TurmaCatequista {
   @PrimaryGeneratedColumn()
   id!: number;
 

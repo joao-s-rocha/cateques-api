@@ -12,7 +12,7 @@ import {
 import { OpenAPI } from "routing-controllers-openapi";
 import { Turma } from "../entities/turma";
 import methTurma from "../methods/turma";
-// import { validaLogin } from "../utils/validaLogin";
+import methTurmaCatequista from "../methods/turmaCatequista";
 
 @JsonController("/turma")
 export class TurmaController {
@@ -29,6 +29,11 @@ export class TurmaController {
     // if (isNull(param) || isEmpty(param))
     // return methTurma.getBy(param);
   }
+
+  // @Get("/teste")
+  // compareCatequi() {
+  //   return methTurmaCatequista.compareCatequistas([1, 34, 20], 1);
+  // }
 
   @Get("/:id")
   @OpenAPI({
