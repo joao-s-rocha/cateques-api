@@ -13,8 +13,6 @@ import {
 import { OpenAPI } from "routing-controllers-openapi";
 import { Turma } from "../entities/turma";
 import methTurma from "../methods/turma";
-import turmaCatequista from "../methods/turmaCatequista";
-import methTurmaCatequista from "../methods/turmaCatequista";
 
 @JsonController("/turma")
 export class TurmaController {
@@ -55,19 +53,6 @@ export class TurmaController {
   })
   postOne(@Body({ validate: false }) tur: Turma) {
     return methTurma.post(tur);
-  }
-
-  @Post("/turmaCatequizando")
-  @OpenAPI({
-    responses: {
-      "400": { description: "Erro na requisição" },
-    },
-  })
-  postTurmaCatequizando(
-    @BodyParam("turmaId", { required: true }) turmaId: number,
-    @BodyParam("usuarioId", { required: true }) usuariosId: number[]
-  ) {
-    return methTurmaCatequista.addCatequistasToTurma(usuariosId, turmaId);
   }
 
   @Put("/:id")
