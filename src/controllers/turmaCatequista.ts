@@ -4,7 +4,7 @@ import methTurmaCatequista from "../methods/turmaCatequista";
 
 @JsonController("/turmaCatequista")
 export class TurmaCatequistaController {
-  @Post("/turmaCatequista")
+  @Post("/")
   @OpenAPI({
     responses: {
       "400": { description: "Erro na requisição" },
