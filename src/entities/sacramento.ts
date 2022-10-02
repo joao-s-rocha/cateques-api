@@ -40,7 +40,7 @@ export class Sacramento {
   @IsNotEmpty()
   tipo_sacramento!: string;
 
-  @Column({ type: "date", nullable: false })
+  @Column({ type: "date", nullable: true })
   @IsDate()
   @IsNotEmpty()
   data_inicio!: Date;

@@ -1,6 +1,5 @@
 import { isEmpty, isNull } from "lodash";
 import {
-  Entity,
   EntitySubscriberInterface,
   EventSubscriber,
   InsertEvent,
@@ -9,6 +8,7 @@ import {
 import { db } from "../db";
 import { Usuario } from "../entities/usuario";
 import { CustomError } from "../utils/customError";
+import { formataData } from "../utils/formataData";
 import { validate } from "../utils/validaEntity";
 
 const repository = db.getRepository(Usuario);
@@ -36,7 +36,10 @@ export class PostSubscriber implements EntitySubscriberInterface<Usuario> {
     await validate(event.entity as Usuario);
   }
 
-  // async afterLoad(entity: any) {
-  //   entity.cliente = entity.cliente.cnpjCpf;
-  // }
+  async afterLoad(entity: any) {
+    if (entity.data_nascimento)
+      entity.data_nascimento = formataData(entity.data_nascimento);
+
+    if (entity.data_cad) entity.data_cad = formataData(entity.data_cad);
+  }
 }

@@ -9,6 +9,7 @@ import { Sacramento } from "../entities/sacramento";
 import { db } from "../db";
 import { validate } from "../utils/validaEntity";
 import { Catequizando } from "../entities/catequizando";
+import { formataData } from "../utils/formataData";
 
 const repository = db.getRepository(Sacramento);
 
@@ -74,7 +75,11 @@ export class PostSubscriber implements EntitySubscriberInterface<Sacramento> {
     await validate(event.entity as Sacramento);
   }
 
-  // async afterLoad(entity: any) {
-  //   entity.cliente = entity.cliente.cnpjCpf;
-  // }
+  async afterLoad(entity: any) {
+    if (entity.data_fechamento)
+      entity.data_fechamento = formataData(entity.data_fechamento);
+
+    if (entity.data_inicio)
+      entity.data_inicio = formataData(entity.data_inicio);
+  }
 }

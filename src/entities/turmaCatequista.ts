@@ -25,11 +25,11 @@ export class TurmaCatequista {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @ManyToOne((type) => Usuario)
+  @ManyToOne((type) => Usuario, { onDelete: "CASCADE", onUpdate: "CASCADE" })
   @JoinColumn({ referencedColumnName: "id" })
   usuario!: Usuario;
 
-  @ManyToOne((type) => Turma)
+  @ManyToOne((type) => Turma, { onDelete: "CASCADE", onUpdate: "CASCADE" })
   @JoinColumn({ referencedColumnName: "id" })
   turma!: Turma;
 
