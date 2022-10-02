@@ -29,7 +29,7 @@ export class CatequizandoController {
   }
 
   @Post("/")
-  postOne(@Body() cat: any) {
+  postOne(@Body({ validate: false }) cat: any) {
     return isArray(cat)
       ? methCatequizando.postOne(cat)
       : methCatequizando.postOne(cat);

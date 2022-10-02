@@ -8,7 +8,7 @@ import {
 import { db } from "../db";
 import { Usuario } from "../entities/usuario";
 import { CustomError } from "../utils/customError";
-import { formataData } from "../utils/formataData";
+import { formataDataBr } from "../utils/formataDataBr";
 import { validate } from "../utils/validaEntity";
 
 const repository = db.getRepository(Usuario);
@@ -38,8 +38,8 @@ export class PostSubscriber implements EntitySubscriberInterface<Usuario> {
 
   async afterLoad(entity: any) {
     if (entity.data_nascimento)
-      entity.data_nascimento = formataData(entity.data_nascimento);
+      entity.data_nascimento = formataDataBr(entity.data_nascimento);
 
-    if (entity.data_cad) entity.data_cad = formataData(entity.data_cad);
+    if (entity.data_cad) entity.data_cad = formataDataBr(entity.data_cad);
   }
 }

@@ -9,7 +9,7 @@ import { Sacramento } from "../entities/sacramento";
 import { db } from "../db";
 import { validate } from "../utils/validaEntity";
 import { Catequizando } from "../entities/catequizando";
-import { formataData } from "../utils/formataData";
+import { formataDataBr } from "../utils/formataDataBr";
 
 const repository = db.getRepository(Sacramento);
 
@@ -77,9 +77,9 @@ export class PostSubscriber implements EntitySubscriberInterface<Sacramento> {
 
   async afterLoad(entity: any) {
     if (entity.data_fechamento)
-      entity.data_fechamento = formataData(entity.data_fechamento);
+      entity.data_fechamento = formataDataBr(entity.data_fechamento);
 
     if (entity.data_inicio)
-      entity.data_inicio = formataData(entity.data_inicio);
+      entity.data_inicio = formataDataBr(entity.data_inicio);
   }
 }

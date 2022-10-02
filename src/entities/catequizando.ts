@@ -61,6 +61,7 @@ export class Catequizando {
   @MaxLength(1, { message: "Tamanho máximo para esse campo é de 1 caracter" })
   @MinLength(1, { message: "Tamanho máximo para esse campo é de 1 caracter" })
   @IsEnum(EstadoCivil, { message: "Enum não correspondente" })
+  @IsOptional()
   estado_civil!: string;
 
   @Column({ type: "date", nullable: true })

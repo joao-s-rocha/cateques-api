@@ -4,6 +4,7 @@ import express from "express";
 import { db } from "./db";
 import bodyParser from "body-parser";
 import path from "path";
+import cors from "cors";
 
 import { validationMetadatasToSchemas } from "class-validator-jsonschema";
 import { routingControllersToSpec } from "routing-controllers-openapi";
@@ -11,7 +12,6 @@ import { useExpressServer, getMetadataArgsStorage } from "routing-controllers";
 import * as swaggerUiExpress from "swagger-ui-express";
 import { defaultMetadataStorage } from "class-transformer/storage";
 
-// import { SacramentoController } from "./controllers/sacramento";
 import { CatequizandoController } from "./controllers/catequizando";
 import { TurmaController } from "./controllers/turma";
 import { UsuarioController } from "./controllers/usuario";
@@ -53,7 +53,7 @@ const spec = routingControllersToSpec(storage, routingControllersOptions, {
 });
 
 app.use(bodyParser.json());
-// app.use(express.json({ limit: "50mb" }));
+app.use(cors());
 
 app.use("/docs", swaggerUiExpress.serve, swaggerUiExpress.setup(spec));
 

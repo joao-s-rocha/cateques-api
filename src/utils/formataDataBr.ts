@@ -1,5 +1,5 @@
 import { format } from "date-fns";
 
-export function formataData(data: Date): String {
+export function formataDataBr(data: Date): String {
   return format(data, "dd/MM/yyyy");
 }
