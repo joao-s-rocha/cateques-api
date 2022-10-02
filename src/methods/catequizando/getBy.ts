@@ -31,6 +31,6 @@ export async function getBy(where: any) {
       },
     });
   } catch (err: any) {
-    throw new CustomError(400, "Erro na busca");
+    throw new CustomError(400, "Erro na busca", err);
   }
 }

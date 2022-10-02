@@ -16,6 +16,6 @@ export async function postOne(sac: any) {
   } catch (err: any) {
     console.log(err);
 
-    throw new CustomError(400, "Registro inválido");
+    throw new CustomError(400, "Registro inválido", err);
   }
 }

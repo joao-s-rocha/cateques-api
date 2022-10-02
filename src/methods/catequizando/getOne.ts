@@ -8,6 +8,6 @@ export async function getOne(id: number) {
   try {
     return await repository.findOneBy({ id });
   } catch (err: any) {
-    throw new CustomError(400, "Catequizando não encontrado");
+    throw new CustomError(400, "Catequizando não encontrado", err);
   }
 }

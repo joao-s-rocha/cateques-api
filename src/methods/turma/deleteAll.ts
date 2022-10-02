@@ -8,6 +8,6 @@ export async function deleteAll() {
   try {
     return repository.delete({});
   } catch (err: any) {
-    throw new CustomError(400, "Erro na requisição");
+    throw new CustomError(400, "Erro na requisição", err);
   }
 }

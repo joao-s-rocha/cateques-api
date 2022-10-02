@@ -29,14 +29,14 @@ export class CatequizandoController {
   }
 
   @Post("/")
-  postOne(@Body({ validate: false }) cat: any) {
+  postOne(@Body({ validate: false }) cat: Catequizando) {
     return isArray(cat)
       ? methCatequizando.postOne(cat)
       : methCatequizando.postOne(cat);
   }
 
-  @Put("/")
-  putOne(@Body() cat: any) {}
+  // @Put("/")
+  // putOne(@Body() cat: any) {}
 
   @Delete("/:id")
   deleteOne(@Param("id") id: number) {}

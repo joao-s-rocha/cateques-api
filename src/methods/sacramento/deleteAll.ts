@@ -8,6 +8,6 @@ export async function deleteAll() {
   try {
     return repository.delete({});
   } catch (err: any) {
-    throw new CustomError(400, "Erro ao excluir");
+    throw new CustomError(400, "Erro ao excluir", err);
   }
 }

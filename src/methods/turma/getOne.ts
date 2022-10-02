@@ -8,6 +8,6 @@ export async function getOne(id: number) {
   try {
     return repository.findOneBy({ id });
   } catch (err: any) {
-    throw new CustomError(400, "Turma não encontrada");
+    throw new CustomError(400, "Turma não encontrada", err);
   }
 }

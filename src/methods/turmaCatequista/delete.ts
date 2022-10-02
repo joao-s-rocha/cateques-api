@@ -1,5 +1,4 @@
 import { isNull } from "lodash";
-import { CustomError } from "../../utils/customError";
 import { db } from "../../db";
 import { Turma } from "../../entities/turma";
 import { TurmaCatequista } from "../../entities/turmaCatequista";
@@ -24,6 +23,6 @@ export async function deleteOne(turmaId: number, usuarioId: number) {
     });
     return repository.delete(turmaCatequista);
   } catch (err: any) {
-    throw new CustomError(400, "Erro na requisição");
+    throw new CustomError(400, "Erro na requisição", err);
   }
 }

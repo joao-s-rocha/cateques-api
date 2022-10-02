@@ -9,6 +9,6 @@ export async function getOne(id: number) {
   try {
     return repository.findOneBy({ id });
   } catch (err: any) {
-    throw new CustomError(400, "Usuário não encontrado");
+    throw new CustomError(400, "Usuário não encontrado", err);
   }
 }

@@ -8,6 +8,6 @@ export async function post(cat: any) {
   try {
     return repository.save(repository.create(cat));
   } catch (err: any) {
-    throw new CustomError(400, "Registro inválido");
+    throw new CustomError(400, "Registro inválido", err);
   }
 }

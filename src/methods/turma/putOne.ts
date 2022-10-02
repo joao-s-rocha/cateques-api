@@ -17,6 +17,6 @@ export async function putOne(id: number, usr: any) {
       repository.merge(usuario as Turma, usr as Turma)
     );
   } catch (err: any) {
-    throw new CustomError(400, "Falha na requisição de modificação");
+    throw new CustomError(400, "Falha na requisição de modificação", err);
   }
 }

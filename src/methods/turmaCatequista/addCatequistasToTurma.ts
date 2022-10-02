@@ -33,7 +33,7 @@ export async function addCatequistasToTurma(
       try {
         repTurmaCatequista.save(repTurmaCatequista.create({ usuario, turma }));
       } catch (err: any) {
-        throw new CustomError(400, "Erro ao ligar turma com catequizando");
+        throw new CustomError(400, "Erro ao ligar turma com catequizando", err);
       }
     }
   });

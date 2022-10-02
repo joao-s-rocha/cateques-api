@@ -8,6 +8,6 @@ export async function getAll() {
   try {
     return await repository.find();
   } catch (err: any) {
-    throw new CustomError(400, "Erro na busca");
+    throw new CustomError(400, "Erro na busca", err);
   }
 }
