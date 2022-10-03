@@ -1,6 +1,7 @@
 import { isArray, isEmpty, isNull } from "lodash";
 import {
   Body,
+  BodyParam,
   Delete,
   Get,
   JsonController,
@@ -10,12 +11,13 @@ import {
   QueryParams,
 } from "routing-controllers";
 import { Catequizando } from "../entities/catequizando";
+import { Documentos } from "../entities/documentos";
 import methCatequizando from "../methods/catequizando";
 
 @JsonController("/catequizando")
 export class CatequizandoController {
   @Get("/")
-  getAll(@QueryParams() param: Catequizando) {
+  getAll(@QueryParams({ validate: false }) param: Catequizando) {
     if (isNull(param) || isEmpty(param)) {
       return methCatequizando.getAll();
     }
@@ -29,10 +31,13 @@ export class CatequizandoController {
   }
 
   @Post("/")
-  postOne(@Body({ validate: false }) cat: Catequizando) {
+  postOne(
+    @BodyParam("catequizando", { validate: false }) cat: Catequizando,
+    @BodyParam("documentos", { validate: false }) docs: Documentos
+  ) {
     return isArray(cat)
-      ? methCatequizando.postOne(cat)
-      : methCatequizando.postOne(cat);
+      ? methCatequizando.postOne(cat, docs)
+      : methCatequizando.postOne(cat, docs);
   }
 
   // @Put("/")

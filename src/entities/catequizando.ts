@@ -66,6 +66,7 @@ export class Catequizando {
 
   @Column({ type: "date", nullable: true })
   @IsDate()
+  @IsOptional()
   data_nascimento!: Date;
 
   @CreateDateColumn()
