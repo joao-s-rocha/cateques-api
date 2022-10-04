@@ -10,21 +10,29 @@ import {
   Put,
   QueryParams,
 } from "routing-controllers";
-import { OpenAPI } from "routing-controllers-openapi";
+import { OpenAPI, ResponseSchema } from "routing-controllers-openapi";
 import { Turma } from "../entities/turma";
 import methTurma from "../methods/turma";
 
 @JsonController("/turma")
 export class TurmaController {
-  // @Get("/catequista/:id")
-  // @OpenAPI({
-  //   responses: {
-  //     "400": { description: "Erro na requisição" },
-  //   },
-  // })
-  // getByCatequista(@Param("id") id: number) {
-  //   return methTurma.getByCatequista(id);
-  // }
+  @Get("/usuario/:id")
+  @OpenAPI({
+    description:
+      "Passe o Id do Usuário desejado, e será retornado apenas turmas que pertencem a tal Catequista. Caso o usuário seja um Coordenador, serão retornadas todas as turmas",
+    responses: {
+      "400": { description: "Erro na requisição" },
+    },
+  })
+  @ResponseSchema(Turma, {
+    isArray: true,
+    contentType: "application/json",
+    description: "Uma lista de turmas",
+    statusCode: "200",
+  })
+  getByCatequista(@Param("id") id: number) {
+    return methTurma.getByCatequista(id);
+  }
 
   @Get("/")
   @OpenAPI({

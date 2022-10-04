@@ -5,6 +5,7 @@ import { post } from "./post";
 import { putOne } from "./putOne";
 import { deleteAll } from "./deleteAll";
 import { deleteOne } from "./deleteOne";
+import { getByCatequista } from "./getByCatequista";
 
 export default {
   getOne,
@@ -13,4 +14,5 @@ export default {
   putOne,
   deleteAll,
   deleteOne,
+  getByCatequista,
 };
