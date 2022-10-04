@@ -18,6 +18,7 @@ import methTurma from "../methods/turma";
 export class TurmaController {
   @Get("/usuario/:id")
   @OpenAPI({
+    summary: "Retorna um vetor de turmas dado um usuário",
     description:
       "Passe o Id do Usuário desejado, e será retornado apenas turmas que pertencem a tal Catequista. Caso o usuário seja um Coordenador, serão retornadas todas as turmas",
     responses: {
@@ -36,6 +37,7 @@ export class TurmaController {
 
   @Get("/")
   @OpenAPI({
+    summary: "Retorna todas as turmas",
     responses: {
       "400": { description: "Erro na requisição" },
     },
@@ -55,6 +57,7 @@ export class TurmaController {
 
   @Get("/:id")
   @OpenAPI({
+    summary: "Retorna uma turma dado seu Id",
     responses: {
       "400": { description: "Erro na requisição" },
     },
@@ -65,6 +68,7 @@ export class TurmaController {
 
   @Post("/")
   @OpenAPI({
+    summary: "Insere uma turma",
     responses: {
       "400": { description: "Erro na requisição" },
     },
@@ -75,6 +79,9 @@ export class TurmaController {
 
   @Put("/:id")
   @OpenAPI({
+    summary: "Atualiza uma turma",
+    description:
+      "Informe o Id da turma, e no corpo da requisição apenas os campos que devem ser alterados",
     responses: {
       "400": { description: "Erro na requisição" },
     },
@@ -85,6 +92,7 @@ export class TurmaController {
 
   @Delete("/:id")
   @OpenAPI({
+    summary: "Deleta uma turma dado seu Id",
     responses: {
       "400": { description: "Erro na requisição" },
     },
@@ -95,6 +103,8 @@ export class TurmaController {
 
   @Delete("/")
   @OpenAPI({
+    summary: "Deleta todas turmas",
+    description: "Utilizar essa rota com cautela",
     responses: {
       "400": { description: "Erro na requisição" },
     },
