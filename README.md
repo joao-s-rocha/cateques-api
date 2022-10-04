@@ -1,5 +1,22 @@
 ## API Catequese
 
+---
+
+- [API Catequese](#api-catequese)
+- [1. Instruções para instalação de back-end](#1-instruções-para-instalação-de-back-end)
+  - [1.1. Node](#11-node)
+  - [1.2. MySQL](#12-mysql)
+  - [1.3. Clonando repositório e instalando módulos](#13-clonando-repositório-e-instalando-módulos)
+    - [1.3.1. Git Clone](#131-git-clone)
+    - [1.3.2. Intalando módulos](#132-intalando-módulos)
+  - [1.4. Arquivo de Conexão com o Banco]()
+  - [1.5. Execução do Projeto]()
+  - [1.6. Possíveis Erros]()
+    - [1.6.1. Erro de Autorização MySQL]()
+  - [2. Documentação de requisições]()
+
+---
+
 ### 1. Instruções para instalação de back-end
 
 #### 1.1. Node
@@ -42,11 +59,9 @@ Para instalarmos basta rodarmos com o **terminal do Visual Studio** o comando:
 
 `npm i --force`
 
-Feito isso, existe só uma ferramenta que não se encontra nesse pacote que é nosso insterpretador de _typescript_. Para instalarmos, rodamos o comando no terminal:
-
-`npm i typescript --save-dev`
-
 Pronto, tudo instalado corretamente.
+
+[Voltar ao início](#api-catequese)
 
 #### 1.4. Arquivo de Conexão com o Banco
 
@@ -73,6 +88,8 @@ export const db = new DataSource({
 
 As opções para conexão do banco estão ok, o que bastará agora é você **criar um banco vazio** no mesmo host e porta com o mesmo user. Este banco deve possuir o mesmo nome do campo `database` do arquivo acima, neste exemplo "catequese".
 
+[Voltar ao início](#api-catequese)
+
 #### 1.5. Execução do Projeto
 
 Seguido todos passos anteriores, podemos executar nosso projeto no terminal do Visual Studio com o comando:
@@ -85,28 +102,28 @@ Caso tudo ocorra corretamente com a execução, as seguintes mensagem aparecerã
 
 Caso contrário, alguns possíveis erros e suas soluções são descritas no próximo item.
 
+[Voltar ao início](#api-catequese)
+
 #### 1.6. Possíveis Erros
 
 ##### 1.6.1. Erro de Autorização MySQL
 
-Pode ocorrer o erro "ERR_NOT_SUPPORTED_AUTH_MODE", isto se da por algum motivo nosso arquivo de configuração descrito no item **1.4** logar com a senha nativa do MySQL, e essa ainda não corresponder com a informada no nosso arquivo `db.ts`.
+Pode ocorrer o erro "ERR_NOT_SUPPORTED_AUTH_MODE", isto se da pelo motivo que nosso arquivo de configuração descrito no item **1.4** deve logar com a senha nativa do MySQL, e essa ainda não corresponder com a informada no nosso arquivo `db.ts`.
 
 Para corrigir esse problema, modificamos a senha nativa do MySQL, com a execução do seguinte código SQL:
 
 ```sql
-ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'senha informada no arquivo db.ts'
+ALTER USER 'usuario informado no arquivo'@'localhost' IDENTIFIED WITH mysql_native_password BY 'senha informada no arquivo db.ts'
 ```
 
 Isso possivelmente corrija o erro.
 
-##### 1.6.2. Erro com NameCase de arquivos
-
-Por algum motivo o arquivo encontrado em: `/src/entities/catequizando.ts` em diferentes instalações não é encontrado.
-
-Para corrigir isso, basta que em todas chamadas deste caminho, substitua `/catequizando.ts` por `/Catequizando.ts`, ou seja, apenas o C em caixa alta.
+[Voltar ao início](#api-catequese)
 
 ### 2. Documentação de requisições
 
 Foi criado um arquivo em _swagger_ para consultar facilmente a estrutura das requisições.
 
 Para acessa-lo basta entrarmos na URL: http://localhost:3000/docs/ com a API já inicializado com o comando `npm run dev`.
+
+[Voltar ao início](#api-catequese)
