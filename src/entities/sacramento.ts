@@ -34,19 +34,17 @@ export class Sacramento {
   catequizando!: Catequizando;
 
   @Column({ type: "enum", enum: TipoSacramento, nullable: false })
-  @MaxLength(1, { message: "Tamanho máximo para esse campo é de 1 caracter" })
-  @MinLength(1, { message: "Tamanho máximo para esse campo é de 1 caracter" })
   @IsEnum(TipoSacramento, { message: "Enum não correspondente" })
   @IsNotEmpty()
   tipo_sacramento!: string;
 
   @Column({ type: "date", nullable: true })
-  @IsDate()
-  @IsNotEmpty()
+  @IsDate({ message: "Este campo recebe uma data no formato: dd/mm/aaaa" })
+  @IsNotEmpty({ message: "Este campo não pode estar vazio" })
   data_inicio!: Date;
 
   @Column({ type: "date", nullable: true })
-  @IsDate()
+  @IsDate({ message: "Este campo recebe uma data no formato: dd/mm/aaaa" })
   @IsOptional()
   data_fechamento!: Date;
 }

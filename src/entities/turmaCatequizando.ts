@@ -38,8 +38,6 @@ export class TurmaCatequizando {
   turma!: Turma;
 
   @Column({ type: "enum", enum: Status, nullable: false })
-  @MaxLength(1, { message: "Tamanho máximo para esse campo é de 1 caracter" })
-  @MinLength(1, { message: "Tamanho máximo para esse campo é de 1 caracter" })
   @IsEnum(Status, { message: "Enum não correspondente" })
   @IsNotEmpty()
   status!: string;

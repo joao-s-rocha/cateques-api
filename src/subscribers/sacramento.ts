@@ -10,6 +10,7 @@ import { db } from "../db";
 import { validate } from "../utils/validaEntity";
 import { Catequizando } from "../entities/catequizando";
 import { formataDataBr } from "../utils/formataDataBr";
+import { CustomError } from "../utils/customError";
 
 const repository = db.getRepository(Sacramento);
 
@@ -66,7 +67,7 @@ export class PostSubscriber implements EntitySubscriberInterface<Sacramento> {
       event.entity.catequizando
     );
 
-    if (!(message == "")) throw message;
+    if (!(message == "")) throw new CustomError(500, message);
 
     await validate(event.entity);
   }

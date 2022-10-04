@@ -37,35 +37,27 @@ export class Catequizando {
   nome!: string;
 
   @Column({ type: "enum", enum: SimNao, default: SimNao.NAO, nullable: true })
-  @MaxLength(1, { message: "Tamanho máximo para esse campo é de 1 caracter" })
-  @MinLength(1, { message: "Tamanho máximo para esse campo é de 1 caracter" })
   @IsEnum(SimNao, { message: "Enum não correspondente" })
   @IsOptional()
   todos_sac!: string;
 
   @Column({ type: "enum", enum: SimNao, default: SimNao.NAO, nullable: true })
-  @MaxLength(1, { message: "Tamanho máximo para esse campo é de 1 caracter" })
-  @MinLength(1, { message: "Tamanho máximo para esse campo é de 1 caracter" })
   @IsEnum(SimNao, { message: "Enum não correspondente" })
   @IsOptional()
   padrinho!: string;
 
   @Column({ type: "enum", enum: SimNao, default: SimNao.NAO, nullable: true })
-  @MaxLength(1, { message: "Tamanho máximo para esse campo é de 1 caracter" })
-  @MinLength(1, { message: "Tamanho máximo para esse campo é de 1 caracter" })
   @IsEnum(SimNao, { message: "Enum não correspondente" })
   @IsOptional()
   madrinha!: string;
 
   @Column({ type: "enum", enum: EstadoCivil, default: null, nullable: true })
-  @MaxLength(1, { message: "Tamanho máximo para esse campo é de 1 caracter" })
-  @MinLength(1, { message: "Tamanho máximo para esse campo é de 1 caracter" })
   @IsEnum(EstadoCivil, { message: "Enum não correspondente" })
   @IsOptional()
   estado_civil!: string;
 
   @Column({ type: "date", nullable: true })
-  @IsDate()
+  @IsDate({ message: "Este campo recebe uma data no formato: dd/mm/aaaa" })
   @IsOptional()
   data_nascimento!: Date;
 

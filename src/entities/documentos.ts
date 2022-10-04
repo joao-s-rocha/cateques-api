@@ -34,50 +34,36 @@ export class Documentos {
   catequizando!: Catequizando;
 
   @Column({ type: "enum", enum: SimNao, default: SimNao.NAO, nullable: false })
-  @MaxLength(1, { message: "Tamanho máximo para esse campo é de 1 caracter" })
-  @MinLength(1, { message: "Tamanho máximo para esse campo é de 1 caracter" })
   @IsEnum(SimNao, { message: "Enum não correspondente" })
   @IsOptional()
   cpf!: string;
 
   @Column({ type: "enum", enum: SimNao, default: SimNao.NAO, nullable: false })
-  @MaxLength(1, { message: "Tamanho máximo para esse campo é de 1 caracter" })
-  @MinLength(1, { message: "Tamanho máximo para esse campo é de 1 caracter" })
   @IsEnum(SimNao, { message: "Enum não correspondente" })
   @IsOptional()
   rg!: string;
 
   @Column({ type: "enum", enum: SimNao, default: SimNao.NAO, nullable: false })
-  @MaxLength(1, { message: "Tamanho máximo para esse campo é de 1 caracter" })
-  @MinLength(1, { message: "Tamanho máximo para esse campo é de 1 caracter" })
   @IsEnum(SimNao, { message: "Enum não correspondente" })
   @IsOptional()
   comprovante_residencia!: string;
 
   @Column({ type: "enum", enum: SimNao, default: SimNao.NAO, nullable: false })
-  @MaxLength(1, { message: "Tamanho máximo para esse campo é de 1 caracter" })
-  @MinLength(1, { message: "Tamanho máximo para esse campo é de 1 caracter" })
   @IsEnum(SimNao, { message: "Enum não correspondente" })
   @IsOptional()
   admissao!: string;
 
   @Column({ type: "enum", enum: SimNao, default: SimNao.NAO, nullable: false })
-  @MaxLength(1, { message: "Tamanho máximo para esse campo é de 1 caracter" })
-  @MinLength(1, { message: "Tamanho máximo para esse campo é de 1 caracter" })
   @IsEnum(SimNao, { message: "Enum não correspondente" })
   @IsOptional()
   vive_maritalmente!: string;
 
   @Column({ type: "enum", enum: SimNao, default: SimNao.NAO, nullable: false })
-  @MaxLength(1, { message: "Tamanho máximo para esse campo é de 1 caracter" })
-  @MinLength(1, { message: "Tamanho máximo para esse campo é de 1 caracter" })
   @IsEnum(SimNao, { message: "Enum não correspondente" })
   @IsOptional()
   casamento_civil!: string;
 
   @Column({ type: "enum", enum: SimNao, default: SimNao.NAO, nullable: false })
-  @MaxLength(1, { message: "Tamanho máximo para esse campo é de 1 caracter" })
-  @MinLength(1, { message: "Tamanho máximo para esse campo é de 1 caracter" })
   @IsEnum(SimNao, { message: "Enum não correspondente" })
   @IsOptional()
   casamento_igreja!: string;

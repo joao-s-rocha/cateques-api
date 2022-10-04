@@ -38,8 +38,6 @@ export class Turma {
   descricao!: string;
 
   @Column({ type: "enum", enum: DiaSemana, nullable: false })
-  @MaxLength(8, { message: "Tamanho máximo para esse campo é de 8 caracteres" })
-  @MinLength(5, { message: "Tamanho máximo para esse campo é de 5 caracteres" })
   @IsEnum(DiaSemana, { message: "Enum não correspondente" })
   @IsNotEmpty()
   dia_semana!: string;
@@ -54,7 +52,7 @@ export class Turma {
   status!: string;
 
   @Column({ type: "date", nullable: true })
-  @IsDate()
+  @IsDate({ message: "Este campo recebe uma data no formato: dd/mm/aaaa" })
   @IsOptional()
   data_conclusao!: Date;
 
