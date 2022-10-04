@@ -16,6 +16,16 @@ import methTurma from "../methods/turma";
 
 @JsonController("/turma")
 export class TurmaController {
+  // @Get("/catequista/:id")
+  // @OpenAPI({
+  //   responses: {
+  //     "400": { description: "Erro na requisição" },
+  //   },
+  // })
+  // getByCatequista(@Param("id") id: number) {
+  //   return methTurma.getByCatequista(id);
+  // }
+
   @Get("/")
   @OpenAPI({
     responses: {

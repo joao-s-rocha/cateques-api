@@ -5,6 +5,7 @@ import { getBy } from "./getBy";
 import { putOne } from "./putOne";
 import { deleteAll } from "./deleteAll";
 import { deleteOne } from "./deleteOne";
+import { login } from "./login";
 
 export default {
   getOne,
@@ -14,4 +15,5 @@ export default {
   deleteAll,
   deleteOne,
   post,
+  login,
 };

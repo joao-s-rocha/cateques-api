@@ -37,6 +37,16 @@ export class UsuarioController {
     return methUsuario.getOne(id);
   }
 
+  @Post("/login")
+  @OpenAPI({
+    responses: {
+      "400": { description: "Registro inválido" },
+    },
+  })
+  login(@Body() params: any) {
+    return methUsuario.login(params);
+  }
+
   @Post("/")
   @OpenAPI({
     responses: {
