@@ -35,7 +35,7 @@ https://dev.mysql.com/downloads/installer/
 
 #### 1.3. Clonando repositório e instalando módulos
 
-Os passos a seguir podem diferir conforme o software utilizado, exemplos serão dados conforme a ferramenta Visual Studio.
+Os passos a seguir podem diferir conforme o software utilizado, exemplos serão dados conforme a ferramenta **Visual Studio**.
 
 ##### 1.3.1. Git Clone
 
