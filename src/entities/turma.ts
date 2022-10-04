@@ -24,6 +24,11 @@ enum DiaSemana {
   SABADO = "SABADO",
 }
 
+enum Status {
+  ATIVO = "ATIVO",
+  INATIVO = "INATIVO",
+}
+
 @Entity({ name: "turma" })
 export class Turma {
   @PrimaryGeneratedColumn()
@@ -42,6 +47,11 @@ export class Turma {
   @Column("time")
   @IsNotEmpty()
   hora!: string;
+
+  @Column({ type: "enum", enum: Status, nullable: false })
+  @IsEnum(Status, { message: "Enum não correspondente" })
+  @IsNotEmpty()
+  status!: string;
 
   @Column({ type: "date", nullable: true })
   @IsDate()
