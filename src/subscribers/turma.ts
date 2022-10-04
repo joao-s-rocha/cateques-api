@@ -22,15 +22,17 @@ export class PostSubscriber implements EntitySubscriberInterface<Turma> {
   }
 
   async beforeInsert(event: InsertEvent<Turma>) {
-    if (!validaDataBr(event.entity.data_conclusao as any))
-      throw new CustomError(400, "Erro na validação da classe", {
-        value: event.entity.data_conclusao,
-        error: "Data de nascimento inválida",
-      });
+    if (event.entity.data_conclusao) {
+      if (!validaDataBr(event.entity.data_conclusao as any))
+        throw new CustomError(400, "Erro na validação da classe", {
+          value: event.entity.data_conclusao,
+          error: "Data de nascimento inválida",
+        });
 
-    event.entity.data_conclusao = dataBrToDate(
-      event.entity.data_conclusao as any
-    );
+      event.entity.data_conclusao = dataBrToDate(
+        event.entity.data_conclusao as any
+      );
+    }
 
     await validate(event.entity as Turma);
   }
