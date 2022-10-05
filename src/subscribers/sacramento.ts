@@ -95,6 +95,33 @@ export class PostSubscriber implements EntitySubscriberInterface<Sacramento> {
   }
 
   async beforeUpdate(event: UpdateEvent<Sacramento>) {
+    if (event.entity) {
+      if (
+        event.entity.tipo_sacramento &&
+        event.entity.tipo_sacramento != event.databaseEntity.tipo_sacramento
+      )
+        throw new CustomError(
+          500,
+          "Não é permitido alterar o tipo de sacramento"
+        );
+
+      if (event.entity.data_fechamento) {
+        if (validaDataBr(event.entity.data_fechamento.toString())) {
+          event.entity.data_fechamento = dataBrToDate(
+            event.entity.data_fechamento as any
+          );
+        }
+      }
+
+      if (event.entity.data_inicio) {
+        if (validaDataBr(event.entity.data_inicio.toString())) {
+          event.entity.data_inicio = dataBrToDate(
+            event.entity.data_inicio as any
+          );
+        }
+      }
+    }
+
     await validate(event.entity as Sacramento);
   }
 }
