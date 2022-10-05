@@ -56,7 +56,7 @@ export class Catequizando {
   @IsOptional()
   estado_civil!: string;
 
-  @Column({ type: "date", nullable: true })
+  @Column({ type: "datetime", nullable: true })
   @IsDate({ message: "Este campo recebe uma data no formato: dd/mm/aaaa" })
   @IsOptional()
   data_nascimento!: Date;

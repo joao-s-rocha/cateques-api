@@ -11,6 +11,8 @@ import { validate } from "../utils/validaEntity";
 import { Catequizando } from "../entities/catequizando";
 import { formataDataBr } from "../utils/formataDataBr";
 import { CustomError } from "../utils/customError";
+import { validaDataBr } from "../utils/validaDataBr";
+import { dataBrToDate } from "../utils/dataBrToDate";
 
 const repository = db.getRepository(Sacramento);
 
@@ -69,18 +71,43 @@ export class PostSubscriber implements EntitySubscriberInterface<Sacramento> {
 
     if (!(message == "")) throw new CustomError(500, message);
 
+    if (event.entity.data_fechamento) {
+      if (!validaDataBr(event.entity.data_fechamento.toString()))
+        throw new CustomError(500, "Data inválida", {
+          value: event.entity.data_fechamento,
+        });
+      event.entity.data_fechamento = dataBrToDate(
+        event.entity.data_fechamento as any
+      );
+    }
+
+    if (event.entity.data_inicio) {
+      if (!validaDataBr(event.entity.data_inicio.toString()))
+        throw new CustomError(500, "Data inválida", {
+          value: event.entity.data_inicio,
+        });
+      event.entity.data_inicio = dataBrToDate(event.entity.data_inicio as any);
+    }
+
     await validate(event.entity);
   }
 
   async beforeUpdate(event: UpdateEvent<Sacramento>) {
+    if (event.entity && event.entity.data_fechamento) {
+      if (validaDataBr(event.entity.data_fechamento.toString())) {
+        event.entity.data_fechamento = dataBrToDate(
+          event.entity.data_fechamento as any
+        );
+      }
+    }
+
+    if (event.entity && event.entity.data_inicio) {
+      if (validaDataBr(event.entity.data_inicio.toString())) {
+        event.entity.data_inicio = dataBrToDate(
+          event.entity.data_inicio as any
+        );
+      }
+    }
     await validate(event.entity as Sacramento);
-  }
-
-  async afterLoad(entity: any) {
-    if (entity.data_fechamento)
-      entity.data_fechamento = formataDataBr(entity.data_fechamento);
-
-    if (entity.data_inicio)
-      entity.data_inicio = formataDataBr(entity.data_inicio);
   }
 }

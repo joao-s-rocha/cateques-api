@@ -38,12 +38,12 @@ export class Sacramento {
   @IsNotEmpty()
   tipo_sacramento!: string;
 
-  @Column({ type: "date", nullable: true })
+  @Column({ type: "datetime", nullable: true })
   @IsDate({ message: "Este campo recebe uma data no formato: dd/mm/aaaa" })
   @IsNotEmpty({ message: "Este campo não pode estar vazio" })
   data_inicio!: Date;
 
-  @Column({ type: "date", nullable: true })
+  @Column({ type: "datetime", nullable: true })
   @IsDate({ message: "Este campo recebe uma data no formato: dd/mm/aaaa" })
   @IsOptional()
   data_fechamento!: Date;

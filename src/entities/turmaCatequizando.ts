@@ -42,7 +42,7 @@ export class TurmaCatequizando {
   @IsNotEmpty()
   status!: string;
 
-  @Column({ type: "date", nullable: false })
+  @Column({ type: "datetime", nullable: false })
   @IsDate()
   @IsNotEmpty()
   data_desistencia!: Date;

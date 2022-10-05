@@ -35,11 +35,4 @@ export class PostSubscriber implements EntitySubscriberInterface<Usuario> {
   async beforeUpdate(event: UpdateEvent<Usuario>) {
     await validate(event.entity as Usuario);
   }
-
-  async afterLoad(entity: any) {
-    if (entity.data_nascimento)
-      entity.data_nascimento = formataDataBr(entity.data_nascimento);
-
-    if (entity.data_cad) entity.data_cad = formataDataBr(entity.data_cad);
-  }
 }

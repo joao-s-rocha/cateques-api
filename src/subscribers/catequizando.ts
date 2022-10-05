@@ -18,24 +18,28 @@ export class PostSubscriber implements EntitySubscriberInterface<Catequizando> {
   }
 
   async beforeInsert(event: InsertEvent<Catequizando>) {
-    if (!validaDataBr(event.entity.data_nascimento as any))
-      throw new CustomError(400, "Erro na validação da classe", {
-        value: event.entity.data_nascimento,
-        error: "Data de nascimento inválida",
-      });
-
-    event.entity.data_nascimento = dataBrToDate(
-      event.entity.data_nascimento as any
-    );
+    if (event.entity.data_nascimento) {
+      if (!validaDataBr(event.entity.data_nascimento.toString()))
+        throw new CustomError(500, "Data inválida", {
+          value: event.entity.data_nascimento,
+        });
+      event.entity.data_nascimento = dataBrToDate(
+        event.entity.data_nascimento as any
+      );
+    }
 
     await validate(event.entity);
   }
 
   async beforeUpdate(event: UpdateEvent<Catequizando>) {
+    if (event.entity && event.entity.data_nascimento) {
+      if (validaDataBr(event.entity.data_nascimento.toString())) {
+        event.entity.data_nascimento = dataBrToDate(
+          event.entity.data_nascimento as any
+        );
+      }
+    }
+
     await validate(event.entity as Catequizando);
   }
-
-  // async afterLoad(entity: any) {
-  //   entity.cliente = entity.cliente.cnpjCpf;
-  // }
 }

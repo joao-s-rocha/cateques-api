@@ -1,9 +1,11 @@
-export function dataBrToDate(data: String): Date {
+export function dataBrToDate(data: string): Date {
   const dataSeparada = data.split("/");
 
-  const dia = parseInt(dataSeparada[0]);
-  const mes = parseInt(dataSeparada[1]);
-  const ano = parseInt(dataSeparada[2]);
+  const dia = dataSeparada[0];
+  const mes = dataSeparada[1];
+  const ano = dataSeparada[2];
 
-  return new Date(ano, mes - 1, dia, 0, 0, 0, 0);
+  const dataJunta = mes + "/" + dia + "/" + ano;
+
+  return new Date(dataJunta);
 }

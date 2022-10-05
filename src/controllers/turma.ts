@@ -16,24 +16,24 @@ import methTurma from "../methods/turma";
 
 @JsonController("/turma")
 export class TurmaController {
-  @Get("/usuario/:id")
-  @OpenAPI({
-    summary: "Retorna um vetor de turmas dado um usuário",
-    description:
-      "Passe o Id do Usuário desejado, e será retornado apenas turmas que pertencem a tal Catequista. Caso o usuário seja um Coordenador, serão retornadas todas as turmas",
-    responses: {
-      "400": { description: "Erro na requisição" },
-    },
-  })
-  @ResponseSchema(Turma, {
-    isArray: true,
-    contentType: "application/json",
-    description: "Uma lista de turmas",
-    statusCode: "200",
-  })
-  getByCatequista(@Param("id") id: number) {
-    return methTurma.getByCatequista(id);
-  }
+  // @Get("/usuario/:id")
+  // @OpenAPI({
+  //   summary: "Retorna um vetor de turmas dado um usuário",
+  //   description:
+  //     "Passe o Id do Usuário desejado, e será retornado apenas turmas que pertencem a tal Catequista. Caso o usuário seja um Coordenador, serão retornadas todas as turmas",
+  //   responses: {
+  //     "400": { description: "Erro na requisição" },
+  //   },
+  // })
+  // @ResponseSchema(Turma, {
+  //   isArray: true,
+  //   contentType: "application/json",
+  //   description: "Uma lista de turmas",
+  //   statusCode: "200",
+  // })
+  // getByCatequista(@Param("id") id: number) {
+  //   return methTurma.getByCatequista(id);
+  // }
 
   @Get("/")
   @OpenAPI({

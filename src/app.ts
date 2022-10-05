@@ -16,6 +16,7 @@ import { CatequizandoController } from "./controllers/catequizando";
 import { TurmaController } from "./controllers/turma";
 import { UsuarioController } from "./controllers/usuario";
 import { TurmaCatequistaController } from "./controllers/turmaCatequista";
+import { dataBrToDate } from "./utils/dataBrToDate";
 
 const routingControllersOptions = {
   controllers: [
