@@ -6,6 +6,7 @@
 - [1. Instruções para instalação de back-end](#1-instruções-para-instalação-de-back-end)
   - [1.1. Node](#11-node)
   - [1.2. MySQL](#12-mysql)
+    - [1.2.1. Criando Schema](#121-criando-schema)
   - [1.3. Clonando repositório e instalando módulos](#13-clonando-repositório-e-instalando-módulos)
     - [1.3.1. Git Clone](#131-git-clone)
     - [1.3.2. Intalando módulos](#132-intalando-módulos)
@@ -32,6 +33,20 @@ Utilizamos o SGBD MySQL, e deve ser utilizada sua imagem em docker ou sua instal
 O executável para instalação pode ser encontrado no seguinte link:
 
 https://dev.mysql.com/downloads/installer/
+
+##### 1.2.1. Criando Schema
+
+Para podermos executar nosso back-end, dentro do MySQL WorkBench devemos criar nosso schema "catequese".
+
+![CreateSchema](imgs/createSchema.jpg)
+
+Na criação deve-se **obrigatoriamente**:
+
+- Schema com o nome: "catequese";
+- Charset: "utf8mb4";
+- Colation: "utf8mb4_cs_as";
+
+Banco de Dados pronto!
 
 #### 1.3. Clonando repositório e instalando módulos
 
