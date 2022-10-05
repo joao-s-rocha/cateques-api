@@ -76,5 +76,7 @@ export class CatequizandoController {
       "400": { description: "Erro na requisição" },
     },
   })
-  deleteOne(@Param("id") id: number) {}
+  deleteOne(@Param("id") id: number) {
+    return methCatequizando.deleteOne(id);
+  }
 }
