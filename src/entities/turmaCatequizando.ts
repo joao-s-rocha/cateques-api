@@ -25,7 +25,7 @@ enum Status {
 }
 
 @Entity({ name: "turma_catequizando" })
-@Unique("UQ_CATEQUIZANDO_TURMA", ["catequizando", "turma"])
+@Unique("UQ_CATEQUIZANDO", ["catequizando"])
 export class TurmaCatequizando {
   @PrimaryGeneratedColumn()
   id!: number;
