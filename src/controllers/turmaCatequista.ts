@@ -1,10 +1,4 @@
-import {
-  BodyParam,
-  Delete,
-  Get,
-  JsonController,
-  Post,
-} from "routing-controllers";
+import { BodyParam, Delete, JsonController, Post } from "routing-controllers";
 import { OpenAPI } from "routing-controllers-openapi";
 import methTurmaCatequista from "../methods/turmaCatequista";
 
@@ -27,6 +21,13 @@ export class TurmaCatequistaController {
   }
 
   @Delete("/")
+  @OpenAPI({
+    summary: "Excluir relação entre turma e catequistas",
+    description: "Informe a turma desejada e o usuário pelos seus Ids",
+    responses: {
+      "400": { description: "Erro na requisição" },
+    },
+  })
   delete(
     @BodyParam("turmaId", { required: true }) turmaId: number,
     @BodyParam("usuarioId", { required: true }) usuarioId: number

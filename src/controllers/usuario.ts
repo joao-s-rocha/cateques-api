@@ -20,6 +20,7 @@ export class UsuarioController {
       "400": { description: "Erro na busca" },
     },
   })
+  @ResponseSchema(Usuario, { isArray: true })
   getAll() {
     return methUsuario.getAll();
 
@@ -35,6 +36,7 @@ export class UsuarioController {
       "400": { description: "Erro na busca" },
     },
   })
+  @ResponseSchema(Usuario)
   getOne(@Param("id") id: number) {
     return methUsuario.getOne(id);
   }
@@ -42,6 +44,7 @@ export class UsuarioController {
   @Post("/login")
   @OpenAPI({
     summary: "Faz login com um usuário",
+    description: "Usuário padrão: login = admin e senha = catequese",
     responses: {
       "200": {
         description: "Sucesso",
@@ -80,6 +83,7 @@ export class UsuarioController {
       "400": { description: "Registro inválido" },
     },
   })
+  @ResponseSchema(Usuario)
   postOne(@Body({ validate: false }) usr: Usuario) {
     return methUsuario.post(usr);
   }
@@ -94,6 +98,7 @@ export class UsuarioController {
       "400": { description: "Falha na requisição de modificação" },
     },
   })
+  @ResponseSchema(Usuario)
   putOne(@Param("id") id: number, @Body({ validate: false }) usr: Usuario) {
     return methUsuario.putOne(id, usr);
   }
@@ -109,15 +114,15 @@ export class UsuarioController {
     return methUsuario.deleteOne(id);
   }
 
-  @Delete("/")
-  @OpenAPI({
-    summary: "Deleta todas turmas",
-    description: "Utilizar essa rota com cautela",
-    responses: {
-      "400": { description: "Erro na requisição" },
-    },
-  })
-  deleteAll() {
-    return methUsuario.deleteAll();
-  }
+  // @Delete("/")
+  // @OpenAPI({
+  //   summary: "Deleta todas turmas",
+  //   description: "Utilizar essa rota com cautela",
+  //   responses: {
+  //     "400": { description: "Erro na requisição" },
+  //   },
+  // })
+  // deleteAll() {
+  //   return methUsuario.deleteAll();
+  // }
 }

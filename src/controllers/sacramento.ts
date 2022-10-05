@@ -6,10 +6,8 @@ import {
   Param,
   Post,
   Put,
-  QueryParams,
-  UseBefore,
 } from "routing-controllers";
-import { OpenAPI } from "routing-controllers-openapi";
+import { OpenAPI, ResponseSchema } from "routing-controllers-openapi";
 import { Sacramento } from "../entities/sacramento";
 import methSacramento from "../methods/sacramento";
 
@@ -22,6 +20,7 @@ export class SacramentoController {
       "400": { description: "Erro na requisição" },
     },
   })
+  @ResponseSchema(Sacramento, { isArray: true })
   getAll() {
     return methSacramento.getAll();
   }
@@ -34,6 +33,7 @@ export class SacramentoController {
       "400": { description: "Erro na requisição" },
     },
   })
+  @ResponseSchema(Sacramento, { isArray: true })
   getOneCatequizando(@Param("id") id: number) {
     return methSacramento.getByCatequizando(id);
   }
@@ -45,6 +45,7 @@ export class SacramentoController {
       "400": { description: "Erro na requisição" },
     },
   })
+  @ResponseSchema(Sacramento)
   getOne(@Param("id") id: number) {
     return methSacramento.getOne(id);
   }
@@ -57,6 +58,7 @@ export class SacramentoController {
       "400": { description: "Erro na requisição" },
     },
   })
+  @ResponseSchema(Sacramento)
   postOne(@Param("id") id: number, @Body({ validate: false }) sac: Sacramento) {
     return methSacramento.postOne(id, sac);
   }
@@ -65,11 +67,12 @@ export class SacramentoController {
   @OpenAPI({
     summary: "Atualiza um Sacramento",
     description:
-      "Informe o Id do Sacramento, e no corpo da requisição apenas os campos que devem ser alterados",
+      "Informe o Id do Sacramento, e no corpo da requisição apenas os campos que devem ser alterados. Lembrando que o campo tipo_sacramento não permite alteração.",
     responses: {
       "400": { description: "Erro na requisição" },
     },
   })
+  @ResponseSchema(Sacramento)
   putOne(@Param("id") id: number, @Body({ validate: false }) sac: Sacramento) {
     return methSacramento.putOne(id, sac);
   }

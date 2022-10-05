@@ -17,14 +17,18 @@ import { TurmaController } from "./controllers/turma";
 import { UsuarioController } from "./controllers/usuario";
 import { TurmaCatequistaController } from "./controllers/turmaCatequista";
 import { SacramentoController } from "./controllers/sacramento";
+import { DocumentosController } from "./controllers/documentos";
+import { TurmaCatequizandoController } from "./controllers/turmaCatequizando";
 
 const routingControllersOptions = {
   controllers: [
     TurmaController,
     TurmaCatequistaController,
+    TurmaCatequizandoController,
     UsuarioController,
     CatequizandoController,
     SacramentoController,
+    DocumentosController,
   ],
   routePrefix: "/api",
 };
@@ -49,7 +53,7 @@ const spec = routingControllersToSpec(storage, routingControllersOptions, {
   },
   info: {
     description: "Generated with `routing-controllers-openapi`",
-    title: "API Tipagem Log de Estoque",
+    title: "API Catequese",
     version: "1.0.0",
   },
 });

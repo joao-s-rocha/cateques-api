@@ -8,13 +8,12 @@ const repository = db.getRepository(Documentos);
 const repCatequizando = db.getRepository(Catequizando);
 
 export async function postOne(id: number, doc: Documentos) {
+  const cat = await repCatequizando.findOneBy({ id });
+
+  if (isNull(cat)) throw new CustomError(404, "Catequizando não encontrado");
+
+  doc.catequizando = cat;
   try {
-    const cat = await repCatequizando.findOneBy({ id });
-
-    if (isNull(cat)) throw new CustomError(404, "Catequizando não encontrado");
-
-    doc.catequizando = cat;
-
     return repository.save(repository.create(doc));
   } catch (err: any) {
     throw new CustomError(400, "Registro inválido", err);

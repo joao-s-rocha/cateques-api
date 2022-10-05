@@ -6,7 +6,7 @@ const repository = db.getRepository(Documentos);
 
 export async function getByCatequizando(id: number) {
   try {
-    return repository.findBy({ catequizando: { id } });
+    return repository.findOneBy({ catequizando: { id } });
   } catch (err: any) {
     throw new CustomError(400, "Erro na busca", err);
   }

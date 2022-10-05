@@ -18,9 +18,6 @@ export async function addCatequizandosToTurma(
   if (isEmpty(idsCatequizandos))
     throw new CustomError(400, "Catequizandos não informados");
 
-  if (await turmaPossuiCatequizando(idsCatequizandos, idTurma))
-    throw new CustomError(400, "Catequizando ou Turma informados inválidos");
-
   const turma = await repTurma.findOneBy({ id: idTurma });
 
   if (isEmpty(turma) || isNull(turma))

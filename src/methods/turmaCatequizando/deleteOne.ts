@@ -9,8 +9,8 @@ const repository = db.getRepository(TurmaCatequista);
 const repUsuario = db.getRepository(Usuario);
 const repTurma = db.getRepository(Turma);
 
-export async function deleteOne(turmaId: number, usuarioId: number) {
-  const usuario = await repUsuario.findOneBy({ id: usuarioId });
+export async function deleteOne(turmaId: number, catequizandoId: number) {
+  const usuario = await repUsuario.findOneBy({ id: catequizandoId });
   const turma = await repTurma.findOneBy({ id: turmaId });
 
   if (isNull(usuario) || isNull(turma))

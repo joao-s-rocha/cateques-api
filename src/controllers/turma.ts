@@ -1,14 +1,11 @@
-import { isEmpty, isNull } from "lodash";
 import {
   Body,
-  BodyParam,
   Delete,
   Get,
   JsonController,
   Param,
   Post,
   Put,
-  QueryParams,
 } from "routing-controllers";
 import { OpenAPI, ResponseSchema } from "routing-controllers-openapi";
 import { Turma } from "../entities/turma";
@@ -42,6 +39,7 @@ export class TurmaController {
       "400": { description: "Erro na requisição" },
     },
   })
+  @ResponseSchema(Turma, { isArray: true })
   getAll() {
     return methTurma.getAll();
 
@@ -57,6 +55,7 @@ export class TurmaController {
       "400": { description: "Erro na requisição" },
     },
   })
+  @ResponseSchema(Turma)
   getOne(@Param("id") id: number) {
     return methTurma.getOne(id);
   }
@@ -68,6 +67,7 @@ export class TurmaController {
       "400": { description: "Erro na requisição" },
     },
   })
+  @ResponseSchema(Turma)
   postOne(@Body({ validate: false }) tur: Turma) {
     return methTurma.post(tur);
   }
@@ -81,6 +81,7 @@ export class TurmaController {
       "400": { description: "Erro na requisição" },
     },
   })
+  @ResponseSchema(Turma)
   putOne(@Param("id") id: number, @Body({ validate: false }) tur: Turma) {
     return methTurma.putOne(id, tur);
   }
@@ -96,15 +97,15 @@ export class TurmaController {
     return methTurma.deleteOne(id);
   }
 
-  @Delete("/")
-  @OpenAPI({
-    summary: "Deleta todas turmas",
-    description: "Utilizar essa rota com cautela",
-    responses: {
-      "400": { description: "Erro na requisição" },
-    },
-  })
-  deleteAll() {
-    return methTurma.deleteAll();
-  }
+  // @Delete("/")
+  // @OpenAPI({
+  //   summary: "Deleta todas turmas",
+  //   description: "Utilizar essa rota com cautela",
+  //   responses: {
+  //     "400": { description: "Erro na requisição" },
+  //   },
+  // })
+  // deleteAll() {
+  //   return methTurma.deleteAll();
+  // }
 }

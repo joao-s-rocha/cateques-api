@@ -1,37 +1,51 @@
-import { isArray, isEmpty, isNull } from "lodash";
+import { isArray } from "lodash";
 import {
   Body,
-  BodyParam,
   Delete,
   Get,
   JsonController,
   Param,
   Post,
   Put,
-  QueryParams,
 } from "routing-controllers";
-import { OpenAPI } from "routing-controllers-openapi";
+import { OpenAPI, ResponseSchema } from "routing-controllers-openapi";
 import { Catequizando } from "../entities/catequizando";
-import { Documentos } from "../entities/documentos";
 import methCatequizando from "../methods/catequizando";
 
 @JsonController("/catequizando")
 export class CatequizandoController {
   @Get("/")
-  getAll(@QueryParams({ validate: false }) param: Catequizando) {
-    if (isNull(param) || isEmpty(param)) {
-      return methCatequizando.getAll();
-    }
-
-    return methCatequizando.getBy(param);
+  @OpenAPI({
+    summary: "Retorna todos os Catequizando",
+    responses: {
+      "400": { description: "Erro na requisição" },
+    },
+  })
+  @ResponseSchema(Catequizando, { isArray: true })
+  getAll() {
+    return methCatequizando.getAll();
   }
 
   @Get("/:id")
+  @OpenAPI({
+    summary: "Retorna um Catequizando dado seu Id",
+    responses: {
+      "400": { description: "Erro na requisição" },
+    },
+  })
+  @ResponseSchema(Catequizando)
   getOne(@Param("id") id: number) {
     return methCatequizando.getOne(id);
   }
 
   @Post("/")
+  @OpenAPI({
+    summary: "Insere um Catequizando",
+    responses: {
+      "400": { description: "Erro na requisição" },
+    },
+  })
+  @ResponseSchema(Catequizando)
   postOne(@Body({ validate: false }) cat: Catequizando) {
     return isArray(cat)
       ? methCatequizando.postOne(cat)
@@ -47,6 +61,7 @@ export class CatequizandoController {
       "400": { description: "Erro na requisição" },
     },
   })
+  @ResponseSchema(Catequizando)
   putOne(
     @Param("id") id: number,
     @Body({ validate: false }) cat: Catequizando
@@ -55,5 +70,11 @@ export class CatequizandoController {
   }
 
   @Delete("/:id")
+  @OpenAPI({
+    summary: "Deleta um Catequizando dado seu Id",
+    responses: {
+      "400": { description: "Erro na requisição" },
+    },
+  })
   deleteOne(@Param("id") id: number) {}
 }

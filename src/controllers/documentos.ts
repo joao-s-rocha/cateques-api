@@ -7,12 +7,12 @@ import {
   Post,
   Put,
 } from "routing-controllers";
-import { OpenAPI } from "routing-controllers-openapi";
+import { OpenAPI, ResponseSchema } from "routing-controllers-openapi";
 import { Documentos } from "../entities/documentos";
 import methDocumentos from "../methods/documentos";
 
 @JsonController("/documentos")
-export class SacramentoController {
+export class DocumentosController {
   @Get("/")
   @OpenAPI({
     summary: "Retorna todos os Documentos",
@@ -20,6 +20,7 @@ export class SacramentoController {
       "400": { description: "Erro na requisição" },
     },
   })
+  @ResponseSchema(Documentos, { isArray: true })
   getAll() {
     return methDocumentos.getAll();
   }
@@ -32,6 +33,7 @@ export class SacramentoController {
       "400": { description: "Erro na requisição" },
     },
   })
+  @ResponseSchema(Documentos)
   getOneCatequizando(@Param("id") id: number) {
     return methDocumentos.getByCatequizando(id);
   }
@@ -43,6 +45,7 @@ export class SacramentoController {
       "400": { description: "Erro na requisição" },
     },
   })
+  @ResponseSchema(Documentos)
   getOne(@Param("id") id: number) {
     return methDocumentos.getOne(id);
   }
@@ -55,6 +58,7 @@ export class SacramentoController {
       "400": { description: "Erro na requisição" },
     },
   })
+  @ResponseSchema(Documentos)
   postOne(@Param("id") id: number, @Body({ validate: false }) doc: Documentos) {
     return methDocumentos.postOne(id, doc);
   }
@@ -68,6 +72,7 @@ export class SacramentoController {
       "400": { description: "Erro na requisição" },
     },
   })
+  @ResponseSchema(Documentos)
   putOne(@Param("id") id: number, @Body({ validate: false }) doc: Documentos) {
     return methDocumentos.putOne(id, doc);
   }

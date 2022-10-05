@@ -1,15 +1,9 @@
-import {
-  BodyParam,
-  Delete,
-  Get,
-  JsonController,
-  Post,
-} from "routing-controllers";
+import { BodyParam, Delete, JsonController, Post } from "routing-controllers";
 import { OpenAPI } from "routing-controllers-openapi";
 import methTurmaCatequizando from "../methods/turmaCatequizando";
 
 @JsonController("/turmaCatequizando")
-export class TurmaCatequistaController {
+export class TurmaCatequizandoController {
   @Post("/")
   @OpenAPI({
     summary: "Ligação entre turma e catequizandos que participarão dela",
@@ -21,16 +15,26 @@ export class TurmaCatequistaController {
   })
   postTurmaCatequista(
     @BodyParam("turmaId", { required: true }) turmaId: number,
-    @BodyParam("usuariosId", { required: true }) usuariosId: number[]
+    @BodyParam("catequizandosId", { required: true }) catequizandosId: number[]
   ) {
-    return methTurmaCatequizando.addCatequizandosToTurma(usuariosId, turmaId);
+    return methTurmaCatequizando.addCatequizandosToTurma(
+      catequizandosId,
+      turmaId
+    );
   }
 
   @Delete("/")
+  @OpenAPI({
+    summary: "Excluir relação entre turma e catequizandos",
+    description: "Informe a turma desejada e o catequizando pelos seus Ids",
+    responses: {
+      "400": { description: "Erro na requisição" },
+    },
+  })
   delete(
     @BodyParam("turmaId", { required: true }) turmaId: number,
-    @BodyParam("usuarioId", { required: true }) usuarioId: number
+    @BodyParam("catequizandoId", { required: true }) catequizandoId: number
   ) {
-    return methTurmaCatequizando.deleteOne(turmaId, usuarioId);
+    return methTurmaCatequizando.deleteOne(turmaId, catequizandoId);
   }
 }
