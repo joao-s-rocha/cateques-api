@@ -19,6 +19,7 @@ import { TurmaCatequistaController } from "./controllers/turmaCatequista";
 import { SacramentoController } from "./controllers/sacramento";
 import { DocumentosController } from "./controllers/documentos";
 import { TurmaCatequizandoController } from "./controllers/turmaCatequizando";
+import { turmaPossuiCatequizando } from "./methods/turmaCatequizando/turmaPossuiCatequizando";
 
 const routingControllersOptions = {
   controllers: [

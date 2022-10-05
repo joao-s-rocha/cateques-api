@@ -20,6 +20,12 @@ export async function addCatequizandosToTurma(
 
   const turma = await repTurma.findOneBy({ id: idTurma });
 
+  if (await turmaPossuiCatequizando(idsCatequizandos, idTurma))
+    throw new CustomError(
+      400,
+      "Catequizandos já existententes na turma, ou turma inválida"
+    );
+
   if (isEmpty(turma) || isNull(turma))
     throw new CustomError(400, "Turma não encontrada");
 

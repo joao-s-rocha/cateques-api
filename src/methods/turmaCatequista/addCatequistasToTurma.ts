@@ -19,7 +19,10 @@ export async function addCatequistasToTurma(
     throw new CustomError(400, "Usuarios não informados");
 
   if (await turmaPossuiCatequistas(idsUsuarios, idTurma))
-    throw new CustomError(400, "Catequistas ou Turma informados inválidos");
+    throw new CustomError(
+      400,
+      "Catequistas já existententes na turma, ou turma inválida"
+    );
 
   const turma = await repTurma.findOneBy({ id: idTurma });
 

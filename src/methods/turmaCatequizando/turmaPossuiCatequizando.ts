@@ -1,19 +1,24 @@
 import { db } from "../../db";
 import { TurmaCatequizando } from "../../entities/turmaCatequizando";
 import { isEmpty, isNull } from "lodash";
+import { In } from "typeorm";
+
+const repository = db.getRepository(TurmaCatequizando);
 
 export async function turmaPossuiCatequizando(
   idsCatequizandos: number[],
-  idTurmaCatequizando: number
+  idTurma: number
 ): Promise<Boolean> {
-  const catequizandoTurma = await db
-    .getRepository(TurmaCatequizando)
-    .createQueryBuilder("turma")
-    .where("turma.id = :id AND turma.catequizandoId in (:catequizandos)", {
-      id: idTurmaCatequizando,
-      catequizandos: idsCatequizandos.toString(),
-    })
-    .getOne();
+  const turmaCatequizandos = await repository.find({
+    where: {
+      catequizando: {
+        id: In(idsCatequizandos),
+      },
+      turma: {
+        id: idTurma,
+      },
+    },
+  });
 
-  return !(isEmpty(catequizandoTurma) || isNull(catequizandoTurma));
+  return !(isEmpty(turmaCatequizandos) || isNull(turmaCatequizandos));
 }
