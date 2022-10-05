@@ -6,7 +6,7 @@ import { formataDataBr } from "../../utils/formataDataBr";
 
 const repository = db.getRepository(Turma);
 
-export async function putOne(id: number, usr: any) {
+export async function putOne(id: number, tur: any) {
   const turma = await repository.findOneBy({ id });
 
   if (isEmpty(turma) || isNull(turma)) {
@@ -14,7 +14,7 @@ export async function putOne(id: number, usr: any) {
   }
 
   try {
-    return repository.save(repository.merge(turma, usr));
+    return repository.save(repository.merge(turma, tur));
   } catch (err: any) {
     throw new CustomError(400, "Falha na requisição de modificação", err);
   }

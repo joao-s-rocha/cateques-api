@@ -1,13 +1,4 @@
 import {
-  IsEnum,
-  IsInt,
-  IsOptional,
-  IsString,
-  MaxLength,
-  MinLength,
-} from "class-validator";
-import { isEmpty, isNull } from "lodash";
-import {
   Body,
   Delete,
   Get,
@@ -18,66 +9,79 @@ import {
   QueryParams,
   UseBefore,
 } from "routing-controllers";
+import { OpenAPI } from "routing-controllers-openapi";
+import { Sacramento } from "../entities/sacramento";
 import methSacramento from "../methods/sacramento";
-import { validaLogin } from "../utils/validaLogin";
-
-enum SimNao {
-  SIM = "S",
-  NAO = "N",
-}
-
-enum TipoSacramento {
-  EUCARISTIA = "E",
-  CRISMA = "C",
-  BATISMO = "B",
-}
-
-class GetSacramento {
-  @IsInt({ message: "Este campo recebe um inteiro" })
-  @IsOptional()
-  catequizando!: number;
-
-  @IsString()
-  @MaxLength(1, { message: "Tamanho máximo para esse campo é de 1 caracter" })
-  @MinLength(1, { message: "Tamanho máximo para esse campo é de 1 caracter" })
-  @IsEnum(SimNao, { message: "Enum não correspondente" })
-  @IsOptional()
-  completo!: string;
-
-  @MaxLength(1, { message: "Tamanho máximo para esse campo é de 1 caracter" })
-  @MinLength(1, { message: "Tamanho máximo para esse campo é de 1 caracter" })
-  @IsEnum(TipoSacramento, { message: "Enum não correspondente" })
-  @IsOptional()
-  tipo_sacramento!: string;
-}
 
 @JsonController("/sacramento")
 export class SacramentoController {
-  @Get()
-  getAll(@QueryParams() param: GetSacramento) {
-    if (isNull(param) || isEmpty(param)) {
-      return methSacramento.getAll();
-    }
+  @Get("/")
+  @OpenAPI({
+    summary: "Retorna todos os Sacramentos",
+    responses: {
+      "400": { description: "Erro na requisição" },
+    },
+  })
+  getAll() {
+    return methSacramento.getAll();
+  }
 
-    return methSacramento.getBy(param);
+  @Get("/catequizando/:id")
+  @OpenAPI({
+    summary: "Busca Sacramentos de determinado Catequizando",
+    description: "Informe o Id do Catequizando para receber seus Sacramentos",
+    responses: {
+      "400": { description: "Erro na requisição" },
+    },
+  })
+  getOneCatequizando(@Param("id") id: number) {
+    return methSacramento.getByCatequizando(id);
   }
 
   @Get("/:id")
-  getByCatequizando(@Param("id") id: number) {
+  @OpenAPI({
+    summary: "Retorna um Sacramento dado seu Id",
+    responses: {
+      "400": { description: "Erro na requisição" },
+    },
+  })
+  getOne(@Param("id") id: number) {
     return methSacramento.getOne(id);
   }
 
-  @Post()
-  @UseBefore(validaLogin)
-  postOne(@Body() sac: any) {
-    return methSacramento.postOne(sac);
+  @Post("/:id")
+  @OpenAPI({
+    summary: "Insere um Sacramento",
+    description: "Informe o Id do Catequizando que receberá o Sacramento",
+    responses: {
+      "400": { description: "Erro na requisição" },
+    },
+  })
+  postOne(@Param("id") id: number, @Body({ validate: false }) sac: Sacramento) {
+    return methSacramento.postOne(id, sac);
   }
 
-  @Put()
-  putOne(@Body() cat: any) {}
+  @Put("/:id")
+  @OpenAPI({
+    summary: "Atualiza um Sacramento",
+    description:
+      "Informe o Id do Sacramento, e no corpo da requisição apenas os campos que devem ser alterados",
+    responses: {
+      "400": { description: "Erro na requisição" },
+    },
+  })
+  putOne(@Param("id") id: number, @Body({ validate: false }) sac: Sacramento) {
+    return methSacramento.putOne(id, sac);
+  }
 
-  @Delete()
-  deleteOne() {
-    return methSacramento.deleteAll();
+  @Delete("/:id")
+  @OpenAPI({
+    summary: "Deleta um Sacramento dado seu Id",
+    responses: {
+      "400": { description: "Erro na requisição" },
+    },
+  })
+  deleteOne(@Param("id") id: number) {
+    return methSacramento.deleteOne(id);
   }
 }

@@ -13,9 +13,7 @@ export async function putOne(id: number, usr: any) {
   }
 
   try {
-    return await repository.save(
-      repository.merge(usuario as Usuario, usr as Usuario)
-    );
+    return repository.save(repository.merge(usuario, usr));
   } catch (err: any) {
     throw new CustomError(400, "Falha na requisição de modificação", err);
   }

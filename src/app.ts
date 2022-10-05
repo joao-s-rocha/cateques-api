@@ -16,7 +16,7 @@ import { CatequizandoController } from "./controllers/catequizando";
 import { TurmaController } from "./controllers/turma";
 import { UsuarioController } from "./controllers/usuario";
 import { TurmaCatequistaController } from "./controllers/turmaCatequista";
-import { dataBrToDate } from "./utils/dataBrToDate";
+import { SacramentoController } from "./controllers/sacramento";
 
 const routingControllersOptions = {
   controllers: [
@@ -24,6 +24,7 @@ const routingControllersOptions = {
     TurmaCatequistaController,
     UsuarioController,
     CatequizandoController,
+    SacramentoController,
   ],
   routePrefix: "/api",
 };
