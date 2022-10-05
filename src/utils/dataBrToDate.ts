@@ -5,5 +5,5 @@ export function dataBrToDate(data: String): Date {
   const mes = parseInt(dataSeparada[1]);
   const ano = parseInt(dataSeparada[2]);
 
-  return new Date(ano, mes, dia, 0, 0, 0, 0);
+  return new Date(ano, mes - 1, dia, 0, 0, 0, 0);
 }

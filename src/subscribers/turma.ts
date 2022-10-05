@@ -3,6 +3,7 @@ import {
   EntitySubscriberInterface,
   EventSubscriber,
   InsertEvent,
+  LoadEvent,
   UpdateEvent,
 } from "typeorm";
 import { db } from "../db";
