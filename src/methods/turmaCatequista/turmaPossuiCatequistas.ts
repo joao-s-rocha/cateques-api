@@ -15,7 +15,5 @@ export async function turmaPossuiCatequistas(
     })
     .getOne();
 
-  console.log(usuarioTurma);
-
   return !(isEmpty(usuarioTurma) || isNull(usuarioTurma));
 }

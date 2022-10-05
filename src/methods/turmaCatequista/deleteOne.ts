@@ -18,10 +18,14 @@ export async function deleteOne(turmaId: number, usuarioId: number) {
 
   try {
     const turmaCatequista = await repository.findOneByOrFail({
-      usuario,
-      turma,
+      usuario: {
+        id: usuario.id,
+      },
+      turma: {
+        id: turma.id,
+      },
     });
-    return repository.delete(turmaCatequista);
+    return repository.delete({ id: turmaCatequista.id });
   } catch (err: any) {
     throw new CustomError(400, "Erro na requisição", err);
   }

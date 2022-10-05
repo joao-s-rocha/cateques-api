@@ -26,17 +26,19 @@ export async function addCatequistasToTurma(
   if (isEmpty(turma) || isNull(turma))
     throw new CustomError(400, "Turma não encontrada");
 
-  idsUsuarios.forEach(async (id) => {
+  for (const id of idsUsuarios) {
     const usuario = await repUsuario.findOneBy({ id });
 
     if (!isNull(usuario)) {
       try {
-        repTurmaCatequista.save(repTurmaCatequista.create({ usuario, turma }));
+        await repTurmaCatequista.save(
+          repTurmaCatequista.create({ usuario, turma })
+        );
       } catch (err: any) {
         throw new CustomError(400, "Erro ao ligar turma com catequizando", err);
       }
     }
-  });
+  }
 
   return HttpCode(200);
 }

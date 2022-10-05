@@ -37,8 +37,6 @@ export async function getByCatequista(id: number) {
       const { turma } = value;
       finalTurmas.push(turma);
     }
-    console.log(finalTurmas);
-
     return finalTurmas;
   }
 }
