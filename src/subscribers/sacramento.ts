@@ -11,6 +11,8 @@ import { validate } from "../utils/validaEntity";
 import { Catequizando } from "../entities/catequizando";
 import { formataDataBr } from "../utils/formataDataBr";
 import { CustomError } from "../utils/customError";
+import { validaDataBr } from "../utils/validaDataBr";
+import { dataBrToDate } from "../utils/dataBrToDate";
 
 const repository = db.getRepository(Sacramento);
 
@@ -27,29 +29,31 @@ async function validaSacramento(
   let message: string = "";
   const sacramentos = await repository.find({
     where: {
-      catequizando: catequizando,
+      catequizando: {
+        id: catequizando.id,
+      },
     },
   });
 
-  const c = procuraSacramento(sacramentos, "C");
-  const e = procuraSacramento(sacramentos, "E");
-  const b = procuraSacramento(sacramentos, "B");
+  const atual = procuraSacramento(sacramentos, tipo);
 
-  switch (tipo) {
-    case "E":
-      if (c == -1)
-        message =
-          "O sacramento de Eucaristia necessita do cumprimento anterior da Crisma";
-      break;
-    case "B":
-      if (b == -1)
-        message = "O sacramento de Batismo já existe para esse Catequizando";
-      break;
-    case "C":
-      if (b == -1 || e == -1)
-        message =
-          "O sacramento de Crisma necessita do cumprimento anterior de Batismo e Eucaristia";
-      break;
+  if (atual > -1) message = "Este sacramento já existe para o Catequizando";
+  else {
+    const e = procuraSacramento(sacramentos, "E");
+    const b = procuraSacramento(sacramentos, "B");
+
+    switch (tipo) {
+      case "E":
+        if (b == -1)
+          message =
+            "O sacramento de Eucaristia necessita do cumprimento anterior de Batismo";
+        break;
+      case "C":
+        if (b == -1 || e == -1)
+          message =
+            "O sacramento de Crisma necessita do cumprimento anterior de Batismo e Eucaristia";
+        break;
+    }
   }
 
   return message;
@@ -62,6 +66,24 @@ export class PostSubscriber implements EntitySubscriberInterface<Sacramento> {
   }
 
   async beforeInsert(event: InsertEvent<Sacramento>) {
+    if (event.entity.data_fechamento) {
+      if (!validaDataBr(event.entity.data_fechamento.toString()))
+        throw new CustomError(500, "Data inválida", {
+          value: event.entity.data_fechamento,
+        });
+      event.entity.data_fechamento = dataBrToDate(
+        event.entity.data_fechamento as any
+      );
+    }
+
+    if (event.entity.data_inicio) {
+      if (!validaDataBr(event.entity.data_inicio.toString()))
+        throw new CustomError(500, "Data inválida", {
+          value: event.entity.data_inicio,
+        });
+      event.entity.data_inicio = dataBrToDate(event.entity.data_inicio as any);
+    }
+
     const message: string = await validaSacramento(
       event.entity.tipo_sacramento,
       event.entity.catequizando
@@ -73,14 +95,21 @@ export class PostSubscriber implements EntitySubscriberInterface<Sacramento> {
   }
 
   async beforeUpdate(event: UpdateEvent<Sacramento>) {
+    if (event.entity && event.entity.data_fechamento) {
+      if (validaDataBr(event.entity.data_fechamento.toString())) {
+        event.entity.data_fechamento = dataBrToDate(
+          event.entity.data_fechamento as any
+        );
+      }
+    }
+
+    if (event.entity && event.entity.data_inicio) {
+      if (validaDataBr(event.entity.data_inicio.toString())) {
+        event.entity.data_inicio = dataBrToDate(
+          event.entity.data_inicio as any
+        );
+      }
+    }
     await validate(event.entity as Sacramento);
-  }
-
-  async afterLoad(entity: any) {
-    if (entity.data_fechamento)
-      entity.data_fechamento = formataDataBr(entity.data_fechamento);
-
-    if (entity.data_inicio)
-      entity.data_inicio = formataDataBr(entity.data_inicio);
   }
 }

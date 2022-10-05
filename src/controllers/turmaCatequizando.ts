@@ -6,15 +6,15 @@ import {
   Post,
 } from "routing-controllers";
 import { OpenAPI } from "routing-controllers-openapi";
-import methTurmaCatequista from "../methods/turmaCatequista";
+import methTurmaCatequizando from "../methods/turmaCatequizando";
 
-@JsonController("/turmaCatequista")
+@JsonController("/turmaCatequizando")
 export class TurmaCatequistaController {
   @Post("/")
   @OpenAPI({
-    summary: "Ligação entre turma e catequistas que participarão dela",
+    summary: "Ligação entre turma e catequizandos que participarão dela",
     description:
-      "Informe a turma desejada e o vetor de Ids dos usuários que serão os Catequistas que ministrarão tal turma",
+      "Informe a turma desejada e o vetor de Ids dos catequizandos que participarão dessa turma",
     responses: {
       "400": { description: "Erro na requisição" },
     },
@@ -23,7 +23,7 @@ export class TurmaCatequistaController {
     @BodyParam("turmaId", { required: true }) turmaId: number,
     @BodyParam("usuariosId", { required: true }) usuariosId: number[]
   ) {
-    return methTurmaCatequista.addCatequistasToTurma(usuariosId, turmaId);
+    return methTurmaCatequizando.addCatequizandosToTurma(usuariosId, turmaId);
   }
 
   @Delete("/")
@@ -31,6 +31,6 @@ export class TurmaCatequistaController {
     @BodyParam("turmaId", { required: true }) turmaId: number,
     @BodyParam("usuarioId", { required: true }) usuarioId: number
   ) {
-    return methTurmaCatequista.deleteOne(turmaId, usuarioId);
+    return methTurmaCatequizando.deleteOne(turmaId, usuarioId);
   }
 }

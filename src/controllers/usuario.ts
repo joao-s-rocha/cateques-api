@@ -7,7 +7,7 @@ import {
   Post,
   Put,
 } from "routing-controllers";
-import { OpenAPI } from "routing-controllers-openapi";
+import { OpenAPI, ResponseSchema } from "routing-controllers-openapi";
 import { Usuario } from "../entities/usuario";
 import methUsuario from "../methods/usuario";
 
@@ -15,6 +15,7 @@ import methUsuario from "../methods/usuario";
 export class UsuarioController {
   @Get("/")
   @OpenAPI({
+    summary: "Retorna todos os usuários",
     responses: {
       "400": { description: "Erro na busca" },
     },
@@ -29,6 +30,7 @@ export class UsuarioController {
 
   @Get("/:id")
   @OpenAPI({
+    summary: "Retorna um usuário dado seu Id",
     responses: {
       "400": { description: "Erro na busca" },
     },
@@ -39,8 +41,32 @@ export class UsuarioController {
 
   @Post("/login")
   @OpenAPI({
+    summary: "Faz login com um usuário",
     responses: {
+      "200": {
+        description: "Sucesso",
+        content: {
+          "application/json": {
+            example: {
+              tokenCatequese: {
+                tipo: "XXXXX",
+                id: 1,
+              },
+            },
+          },
+        },
+      },
       "400": { description: "Registro inválido" },
+    },
+    requestBody: {
+      content: {
+        "application/json": {
+          example: {
+            login: "login",
+            senha: "senhasecreta",
+          },
+        },
+      },
     },
   })
   login(@Body() params: any) {
@@ -49,6 +75,7 @@ export class UsuarioController {
 
   @Post("/")
   @OpenAPI({
+    summary: "Insere um usuário",
     responses: {
       "400": { description: "Registro inválido" },
     },
@@ -59,6 +86,9 @@ export class UsuarioController {
 
   @Put("/:id")
   @OpenAPI({
+    summary: "Altera um usuário dado seu Id",
+    description:
+      "Informe o Id do usuário, e no corpo da requisição apenas os campos que devem ser alterados",
     responses: {
       "404": { description: "Usuário não encontrado" },
       "400": { description: "Falha na requisição de modificação" },
@@ -70,6 +100,7 @@ export class UsuarioController {
 
   @Delete("/:id")
   @OpenAPI({
+    summary: "Deleta um usuário dado seu Id",
     responses: {
       "400": { description: "Erro na requisição" },
     },
@@ -80,6 +111,8 @@ export class UsuarioController {
 
   @Delete("/")
   @OpenAPI({
+    summary: "Deleta todas turmas",
+    description: "Utilizar essa rota com cautela",
     responses: {
       "400": { description: "Erro na requisição" },
     },

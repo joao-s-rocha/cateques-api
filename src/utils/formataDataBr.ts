@@ -1,9 +1,5 @@
-import { format, parse, parseISO } from "date-fns";
-
-export function formataDataBr(data: Date | string): String {
-  try {
-    return format(parseISO(data as string), "dd/MM/yyyy");
-  } catch {
-    return format(data as Date, "dd/MM/yyyy");
-  }
+export function formataDataBr(data: Date): string {
+  return (
+    data.getDate() + "/" + (data.getMonth() + 1) + "/" + data.getFullYear()
+  );
 }

@@ -24,8 +24,4 @@ export class PostSubscriber implements EntitySubscriberInterface<Documentos> {
   async beforeUpdate(event: UpdateEvent<Documentos>) {
     await validate(event.entity as Documentos);
   }
-
-  async afterLoad(entity: any) {
-    if (!isArray(entity)) entity.catequizando = entity.catequizando.id;
-  }
 }

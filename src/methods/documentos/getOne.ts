@@ -1,8 +1,8 @@
 import { db } from "../../db";
-import { Sacramento } from "../../entities/sacramento";
+import { Documentos } from "../../entities/documentos";
 import { CustomError } from "../../utils/customError";
 
-const repository = db.getRepository(Sacramento);
+const repository = db.getRepository(Documentos);
 
 export async function getOne(id: number) {
   try {

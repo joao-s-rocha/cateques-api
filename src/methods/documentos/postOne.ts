@@ -1,24 +1,22 @@
 import { isEmpty, isNull } from "lodash";
 import { db } from "../../db";
 import { Catequizando } from "../../entities/catequizando";
-import { Sacramento } from "../../entities/sacramento";
+import { Documentos } from "../../entities/documentos";
 import { CustomError } from "../../utils/customError";
 
-const repository = db.getRepository(Sacramento);
+const repository = db.getRepository(Documentos);
 const repCatequizando = db.getRepository(Catequizando);
 
-export async function postOne(id: number, sac: Sacramento) {
+export async function postOne(id: number, doc: Documentos) {
   try {
     const cat = await repCatequizando.findOneBy({ id });
 
     if (isNull(cat)) throw new CustomError(404, "Catequizando não encontrado");
 
-    sac.catequizando = cat;
+    doc.catequizando = cat;
 
-    return repository.save(repository.create(sac));
+    return repository.save(repository.create(doc));
   } catch (err: any) {
-    console.log(err);
-
     throw new CustomError(400, "Registro inválido", err);
   }
 }

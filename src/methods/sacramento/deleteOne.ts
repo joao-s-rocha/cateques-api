@@ -4,9 +4,9 @@ import { CustomError } from "../../utils/customError";
 
 const repository = db.getRepository(Sacramento);
 
-export async function deleteAll() {
+export async function deleteOne(id: number) {
   try {
-    return repository.delete({});
+    return repository.delete({ id });
   } catch (err: any) {
     throw new CustomError(400, "Erro ao excluir", err);
   }

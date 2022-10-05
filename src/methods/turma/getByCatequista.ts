@@ -1,42 +1,42 @@
 import { db } from "../../db";
 import { Turma } from "../../entities/turma";
-import { isEmpty, isNull } from "lodash";
+import { isEmpty, isNull, pick } from "lodash";
 import { Usuario } from "../../entities/usuario";
 import { TurmaCatequista } from "../../entities/turmaCatequista";
 import { CustomError } from "../../utils/customError";
-import { HttpCode } from "routing-controllers";
-
 const repUsuario = db.getRepository(Usuario);
 const repTurma = db.getRepository(Turma);
+const repTurmaCatequista = db.getRepository(TurmaCatequista);
 
 export async function getByCatequista(id: number) {
   const usuario = await repUsuario.findOneBy({ id });
-  let where: {};
 
   if (isEmpty(usuario) || isNull(usuario))
     throw new CustomError(400, "Usuario não encontrado");
 
   if (usuario.tipo == "COORDENADOR") return repTurma.find();
   else {
-    const usuariosTurma = await db
-      .getRepository(TurmaCatequista)
-      .createQueryBuilder("tc")
-      .select("tc.turmaId")
-      .where("tc.usuarioId = :usuario", {
-        usuario: id,
-      })
-      .getMany();
+    const turmas = await repTurmaCatequista.find({
+      select: {
+        data_cad: false,
+        id: false,
+      },
+      relations: {
+        turma: true,
+      },
+      where: {
+        usuario: {
+          id,
+        },
+      },
+    });
 
-    if (isEmpty(usuariosTurma)) return HttpCode(200);
+    const finalTurmas: Turma[] = [];
 
-    const turmas = await db
-      .getRepository(Turma)
-      .createQueryBuilder("t")
-      .where("t.id in (:turmas)", {
-        turmas: usuariosTurma.toString(),
-      })
-      .getMany();
-
-    return turmas;
+    for (const value of turmas) {
+      const { turma } = value;
+      finalTurmas.push(turma);
+    }
+    return finalTurmas;
   }
 }

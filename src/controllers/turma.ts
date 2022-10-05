@@ -50,11 +50,6 @@ export class TurmaController {
     // return methTurma.getBy(param);
   }
 
-  // @Get("/teste")
-  // compareCatequi() {
-  //   return methTurmaCatequista.compareCatequistas([1, 34, 20], 1);
-  // }
-
   @Get("/:id")
   @OpenAPI({
     summary: "Retorna uma turma dado seu Id",
