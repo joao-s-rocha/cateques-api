@@ -31,13 +31,10 @@ export class CatequizandoController {
   }
 
   @Post("/")
-  postOne(
-    @BodyParam("catequizando", { validate: false }) cat: Catequizando,
-    @BodyParam("documentos", { validate: false }) docs: Documentos
-  ) {
+  postOne(@Body({ validate: false }) cat: Catequizando) {
     return isArray(cat)
-      ? methCatequizando.postOne(cat, docs)
-      : methCatequizando.postOne(cat, docs);
+      ? methCatequizando.postOne(cat)
+      : methCatequizando.postOne(cat);
   }
 
   // @Put("/")

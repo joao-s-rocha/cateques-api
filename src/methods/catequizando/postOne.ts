@@ -6,15 +6,9 @@ import { CustomError } from "../../utils/customError";
 const repCatequizando = db.getRepository(Catequizando);
 const repDocumentos = db.getRepository(Documentos);
 
-export async function postOne(cat: any, docs: any) {
+export async function postOne(cat: any) {
   try {
-    const catequizando = await repCatequizando.save(
-      repCatequizando.create(cat)
-    );
-    docs.catequizando = catequizando;
-    const documentos = await repDocumentos.save(repDocumentos.create(docs));
-    (documentos as any).catequizando = (catequizando as any).id;
-    return { catequizando, documentos };
+    return repCatequizando.save(repCatequizando.create(cat));
   } catch (err: any) {
     throw new CustomError(400, "Registro inválido", err);
   }

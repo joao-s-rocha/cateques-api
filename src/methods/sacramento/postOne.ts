@@ -17,8 +17,6 @@ export async function postOne(id: number, sac: Sacramento) {
 
     return repository.save(repository.create(sac));
   } catch (err: any) {
-    console.log(err);
-
     throw new CustomError(400, "Registro inválido", err);
   }
 }
