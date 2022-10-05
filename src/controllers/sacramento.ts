@@ -61,18 +61,18 @@ export class SacramentoController {
     return methSacramento.postOne(id, sac);
   }
 
-  @Put("/:id")
-  @OpenAPI({
-    summary: "Atualiza um Sacramento",
-    description:
-      "Informe o Id do Sacramento, e no corpo da requisição apenas os campos que devem ser alterados",
-    responses: {
-      "400": { description: "Erro na requisição" },
-    },
-  })
-  putOne(@Param("id") id: number, @Body({ validate: false }) sac: Sacramento) {
-    return methSacramento.putOne(id, sac);
-  }
+  // @Put("/:id")
+  // @OpenAPI({
+  //   summary: "Atualiza um Sacramento",
+  //   description:
+  //     "Informe o Id do Sacramento, e no corpo da requisição apenas os campos que devem ser alterados",
+  //   responses: {
+  //     "400": { description: "Erro na requisição" },
+  //   },
+  // })
+  // putOne(@Param("id") id: number, @Body({ validate: false }) sac: Sacramento) {
+  //   return methSacramento.putOne(id, sac);
+  // }
 
   @Delete("/:id")
   @OpenAPI({

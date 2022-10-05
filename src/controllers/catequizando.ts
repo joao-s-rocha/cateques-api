@@ -10,6 +10,7 @@ import {
   Put,
   QueryParams,
 } from "routing-controllers";
+import { OpenAPI } from "routing-controllers-openapi";
 import { Catequizando } from "../entities/catequizando";
 import { Documentos } from "../entities/documentos";
 import methCatequizando from "../methods/catequizando";
@@ -37,8 +38,21 @@ export class CatequizandoController {
       : methCatequizando.postOne(cat);
   }
 
-  // @Put("/")
-  // putOne(@Body() cat: any) {}
+  @Put("/:id")
+  @OpenAPI({
+    summary: "Atualiza um Catequizando",
+    description:
+      "Informe o Id do Catequizando, e no corpo da requisição apenas os campos que devem ser alterados",
+    responses: {
+      "400": { description: "Erro na requisição" },
+    },
+  })
+  putOne(
+    @Param("id") id: number,
+    @Body({ validate: false }) cat: Catequizando
+  ) {
+    return methCatequizando.putOne(id, cat);
+  }
 
   @Delete("/:id")
   deleteOne(@Param("id") id: number) {}

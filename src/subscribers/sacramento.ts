@@ -95,21 +95,6 @@ export class PostSubscriber implements EntitySubscriberInterface<Sacramento> {
   }
 
   async beforeUpdate(event: UpdateEvent<Sacramento>) {
-    if (event.entity && event.entity.data_fechamento) {
-      if (validaDataBr(event.entity.data_fechamento.toString())) {
-        event.entity.data_fechamento = dataBrToDate(
-          event.entity.data_fechamento as any
-        );
-      }
-    }
-
-    if (event.entity && event.entity.data_inicio) {
-      if (validaDataBr(event.entity.data_inicio.toString())) {
-        event.entity.data_inicio = dataBrToDate(
-          event.entity.data_inicio as any
-        );
-      }
-    }
     await validate(event.entity as Sacramento);
   }
 }

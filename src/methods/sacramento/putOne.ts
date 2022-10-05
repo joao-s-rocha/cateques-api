@@ -6,7 +6,10 @@ import { Sacramento } from "../../entities/sacramento";
 const repository = db.getRepository(Sacramento);
 
 export async function putOne(id: number, sac: any) {
-  const sacramento = await repository.findOneBy({ id });
+  const sacramento = await repository.findOne({
+    relations: { catequizando: true },
+    where: { id },
+  });
 
   if (isEmpty(sacramento) || isNull(sacramento)) {
     throw new CustomError(404, "Sacramento não encontrado");
