@@ -69,4 +69,4 @@ useExpressServer(app, {
   controllers: [path.join(__dirname + "/controllers/*.ts")],
 });
 
-app.listen(3000);
+app.listen(3001);
