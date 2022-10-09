@@ -25,17 +25,19 @@ export class Usuario {
   id!: number;
 
   @Column({ type: "varchar", length: 30, nullable: false })
-  @MaxLength(30, { message: "Tamanho máximo para esse campo é de 30 caracter" })
-  @MinLength(4, { message: "Tamanho máximo para esse campo é de 4 caracter" })
+  @MaxLength(30, {
+    message: "Tamanho máximo para esse campo é de 30 caracteres",
+  })
+  @MinLength(4, { message: "Tamanho mínimo para esse campo é de 4 caracteres" })
   @IsString({ message: "Este campo deve receber uma String" })
   @IsNotEmpty({ message: "Este campo deve receber um valor" })
   login!: string;
 
   @Column({ type: "varchar", length: 120, nullable: false })
   @MaxLength(120, {
-    message: "Tamanho máximo para esse campo é de 120 caracter",
+    message: "Tamanho máximo para esse campo é de 120 caracteres",
   })
-  @MinLength(3, { message: "Tamanho máximo para esse campo é de 3 caracter" })
+  @MinLength(3, { message: "Tamanho mínimo para esse campo é de 3 caracteres" })
   @IsString({ message: "Este campo deve receber uma String" })
   @IsNotEmpty({ message: "Este campo deve receber um valor" })
   senha!: string;
@@ -53,6 +55,9 @@ export class Usuario {
 
   @Column("varchar", { length: 120 })
   @IsString({ message: "Este campo recebe uma string" })
+  @MaxLength(120, {
+    message: "Tamanho máximo para esse campo é de 120 caracteres",
+  })
   @IsNotEmpty({ message: "Este campo não pode estar vazio" })
   nome!: string;
 

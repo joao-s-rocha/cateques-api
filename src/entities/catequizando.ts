@@ -33,6 +33,7 @@ export class Catequizando {
 
   @Column("varchar", { length: 120 })
   @IsString({ message: "Este campo recebe uma string" })
+  @MaxLength(120, { message: "" })
   @IsNotEmpty({ message: "Este campo não pode estar vazio" })
   nome!: string;
 
@@ -40,16 +41,6 @@ export class Catequizando {
   @IsEnum(SimNao, { message: "Enum não correspondente" })
   @IsOptional()
   todos_sac!: string;
-
-  @Column({ type: "enum", enum: SimNao, default: SimNao.NAO, nullable: true })
-  @IsEnum(SimNao, { message: "Enum não correspondente" })
-  @IsOptional()
-  padrinho!: string;
-
-  @Column({ type: "enum", enum: SimNao, default: SimNao.NAO, nullable: true })
-  @IsEnum(SimNao, { message: "Enum não correspondente" })
-  @IsOptional()
-  madrinha!: string;
 
   @Column({ type: "enum", enum: EstadoCivil, default: null, nullable: true })
   @IsEnum(EstadoCivil, { message: "Enum não correspondente" })

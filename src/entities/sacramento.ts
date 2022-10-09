@@ -3,6 +3,7 @@ import {
   IsEnum,
   IsNotEmpty,
   IsOptional,
+  IsString,
   MaxLength,
   MinLength,
 } from "class-validator";
@@ -37,6 +38,21 @@ export class Sacramento {
   @IsEnum(TipoSacramento, { message: "Enum não correspondente" })
   @IsNotEmpty()
   tipo_sacramento!: string;
+
+  @Column("varchar", { length: 120 })
+  @MaxLength(120, {
+    message: "Tamanho máximo para esse campo é de 120 caracteres",
+  })
+  @IsString({ message: "Este campo recebe uma string" })
+  @IsOptional()
+  nome_padrinho!: string;
+
+  @MaxLength(120, {
+    message: "Tamanho máximo para esse campo é de 120 caracteres",
+  })
+  @IsString({ message: "Este campo recebe uma string" })
+  @IsOptional()
+  nome_madrinha!: string;
 
   @Column({ type: "datetime", nullable: true })
   @IsDate({ message: "Este campo recebe uma data no formato: dd/mm/aaaa" })
