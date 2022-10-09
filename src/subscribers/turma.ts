@@ -13,6 +13,7 @@ import { dataBrToDate } from "../utils/dataBrToDate";
 import { formataDataBr } from "../utils/formataDataBr";
 import { validaDataBr } from "../utils/validaDataBr";
 import { validate } from "../utils/validaEntity";
+import { validarCompletoDataBr } from "../utils/validarCompletoDatabBr";
 
 const repository = db.getRepository(Turma);
 
@@ -23,11 +24,10 @@ export class PostSubscriber implements EntitySubscriberInterface<Turma> {
   }
 
   async beforeInsert(event: InsertEvent<Turma>) {
-    if (event.entity.data_conclusao) {
-      if (!validaDataBr(event.entity.data_conclusao.toString()))
-        throw new CustomError(500, "Data inválida", {
-          value: event.entity.data_conclusao,
-        });
+    if (
+      event.entity.data_conclusao &&
+      validarCompletoDataBr(event.entity.data_conclusao.toString())
+    ) {
       event.entity.data_conclusao = dataBrToDate(
         event.entity.data_conclusao as any
       );
@@ -36,12 +36,14 @@ export class PostSubscriber implements EntitySubscriberInterface<Turma> {
   }
 
   async beforeUpdate(event: UpdateEvent<Turma>) {
-    if (event.entity && event.entity.data_conclusao) {
-      if (validaDataBr(event.entity.data_conclusao.toString())) {
-        event.entity.data_conclusao = dataBrToDate(
-          event.entity.data_conclusao as any
-        );
-      }
+    if (
+      event.entity &&
+      event.entity.data_conclusao &&
+      validarCompletoDataBr(event.entity.data_conclusao.toString())
+    ) {
+      event.entity.data_conclusao = dataBrToDate(
+        event.entity.data_conclusao as any
+      );
     }
     await validate(event.entity as Turma);
   }
