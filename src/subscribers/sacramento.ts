@@ -12,8 +12,10 @@ import { Catequizando } from "../entities/catequizando";
 import { CustomError } from "../utils/customError";
 import { dataBrToDate } from "../utils/dataBrToDate";
 import { validarCompletoDataBr } from "../utils/validarCompletoDatabBr";
+import { Documentos } from "../entities/documentos";
 
 const repository = db.getRepository(Sacramento);
+const repDocumentos = db.getRepository(Documentos);
 
 function procuraSacramentoData(
   sacramentos: Sacramento[],
@@ -40,7 +42,20 @@ async function validaSacramento(
   catequizando: Catequizando,
   data_inicio: Date
 ): Promise<string> {
-  let message: string = "";
+  if (tipo === "E") {
+    const documentos = await repDocumentos.findOne({
+      where: {
+        vive_maritalmente: "S",
+        catequizando: {
+          id: catequizando.id,
+        },
+      },
+    });
+
+    if (isNull(documentos))
+      return "O sacramento de Eucaristia necessita do Catequizando estar vivendo maritalmente";
+  }
+
   const sacramentos = await repository.find({
     where: {
       catequizando: {
@@ -51,7 +66,7 @@ async function validaSacramento(
 
   const atual = procuraSacramento(sacramentos, tipo);
 
-  if (atual > -1) message = "Este sacramento já existe para o Catequizando";
+  if (atual > -1) return "Este sacramento já existe para o Catequizando";
   else {
     const e = procuraSacramentoData(sacramentos, "E", data_inicio);
     const b = procuraSacramentoData(sacramentos, "B", data_inicio);
@@ -59,20 +74,22 @@ async function validaSacramento(
     switch (tipo) {
       case "E":
         if (b == -1)
-          message =
+          return (
             "O sacramento de Eucaristia necessita do cumprimento anterior de Batismo. " +
-            "E sua data de fechamento deve ser válida com o Batismo";
+            "E sua data de fechamento deve ser válida com o Batismo"
+          );
         break;
       case "C":
         if (b == -1 || e == -1)
-          message =
+          return (
             "O sacramento de Crisma necessita do cumprimento anterior de Batismo e Eucaristia. " +
-            "E sua data de fechamento deve ser válida com outros Sacramentos";
+            "E sua data de fechamento deve ser válida com outros Sacramentos"
+          );
         break;
     }
   }
 
-  return message;
+  return "";
 }
 
 @EventSubscriber()
