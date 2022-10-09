@@ -3,8 +3,6 @@ import { CustomError } from "./customError";
 
 export async function validate(obj: Object) {
   await validateOrReject(obj).catch((errors) => {
-    console.log(errors);
-
     const err = errors.reduce(
       (result: any, { value, property, constraints }: any) =>
         result.push({

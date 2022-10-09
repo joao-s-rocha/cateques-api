@@ -4,9 +4,10 @@ import { Usuario } from "../../entities/usuario";
 
 const repository = db.getRepository(Usuario);
 
-export async function post(cat: any) {
+export async function post(usr: Usuario) {
   try {
-    return repository.save(repository.create(cat));
+    // usr.senha = bcrypt.encrypt(usr.senha);
+    return repository.save(repository.create(usr));
   } catch (err: any) {
     throw new CustomError(400, "Registro inválido", err);
   }

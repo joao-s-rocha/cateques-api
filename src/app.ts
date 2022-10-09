@@ -1,5 +1,4 @@
 import "reflect-metadata";
-import { createExpressServer } from "routing-controllers";
 import express from "express";
 import { db } from "./db";
 import bodyParser from "body-parser";
@@ -19,7 +18,7 @@ import { TurmaCatequistaController } from "./controllers/turmaCatequista";
 import { SacramentoController } from "./controllers/sacramento";
 import { DocumentosController } from "./controllers/documentos";
 import { TurmaCatequizandoController } from "./controllers/turmaCatequizando";
-import { turmaPossuiCatequizando } from "./methods/turmaCatequizando/turmaPossuiCatequizando";
+import { Login } from "./controllers/login";
 
 const routingControllersOptions = {
   controllers: [
@@ -30,6 +29,7 @@ const routingControllersOptions = {
     CatequizandoController,
     SacramentoController,
     DocumentosController,
+    Login,
   ],
   routePrefix: "/api",
 };
