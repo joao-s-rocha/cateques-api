@@ -1,15 +1,11 @@
-import { isArray } from "lodash";
 import {
   EntitySubscriberInterface,
   EventSubscriber,
   InsertEvent,
   UpdateEvent,
 } from "typeorm";
-import { db } from "../db";
 import { Documentos } from "../entities/documentos";
 import { validate } from "../utils/validaEntity";
-
-const repository = db.getRepository(Documentos);
 
 @EventSubscriber()
 export class PostSubscriber implements EntitySubscriberInterface<Documentos> {
