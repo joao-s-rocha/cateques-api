@@ -5,7 +5,6 @@ import {
   IsOptional,
   IsString,
   MaxLength,
-  MinLength,
 } from "class-validator";
 import {
   Column,
@@ -17,6 +16,11 @@ import {
 enum SimNao {
   SIM = "S",
   NAO = "N",
+}
+
+enum Sexo {
+  MULHER = "M",
+  HOMEM = "H",
 }
 
 enum EstadoCivil {
@@ -33,7 +37,7 @@ export class Catequizando {
 
   @Column("varchar", { length: 120 })
   @IsString({ message: "Este campo recebe uma string" })
-  @MaxLength(120, { message: "" })
+  @MaxLength(120, { message: "Tamanho máximo de 120 caracteres" })
   @IsNotEmpty({ message: "Este campo não pode estar vazio" })
   nome!: string;
 
@@ -46,6 +50,23 @@ export class Catequizando {
   @IsEnum(EstadoCivil, { message: "Enum não correspondente" })
   @IsOptional()
   estado_civil!: string;
+
+  @Column("varchar", { length: 13 })
+  @IsString({ message: "Este campo recebe uma string" })
+  @MaxLength(13, { message: "Tamanho máximo de 13 caracteres" })
+  @IsNotEmpty({ message: "Este campo não pode estar vazio" })
+  telefone_1!: string;
+
+  @Column("varchar", { length: 13 })
+  @IsString({ message: "Este campo recebe uma string" })
+  @MaxLength(13, { message: "Tamanho máximo de 13 caracteres" })
+  @IsOptional()
+  telefone_2!: string;
+
+  @Column({ type: "enum", enum: Sexo, default: null, nullable: false })
+  @IsEnum(Sexo, { message: "Enum não correspondente" })
+  @IsOptional()
+  sexo!: string;
 
   @Column({ type: "datetime", nullable: true })
   @IsDate({ message: "Este campo recebe uma data no formato: dd/mm/aaaa" })
