@@ -15,12 +15,11 @@ export async function login(params: any) {
   if (login == "admin" && senha == "catequese")
     return { tokenCatequese: { tipo: "COORDENADOR", id: 0 } };
 
+  const usuario = await repository.findOne({ where: { login, senha } });
+
+  if (isNull(usuario)) throw new CustomError(404, "Login ou senha inválidos");
+
   try {
-    const usuario = await repository.findOneBy({ login, senha });
-
-    if (isEmpty(usuario) || isNull(usuario))
-      throw new CustomError(404, "Login ou senha inválidos");
-
     if (usuario.tipo == "COORDENADOR")
       return { tokenCatequese: { tipo: "COORDENADOR", id: usuario.id } };
     else return { tokenCatequese: { tipo: "CATEQUISTA", id: usuario.id } };

@@ -6,12 +6,15 @@ import {
   Param,
   Post,
   Put,
+  UseBefore,
 } from "routing-controllers";
 import { OpenAPI, ResponseSchema } from "routing-controllers-openapi";
 import { Documentos } from "../entities/documentos";
 import methDocumentos from "../methods/documentos";
+import { validaLoginCoordenador } from "../utils/validaLogin";
 
 @JsonController("/documentos")
+@UseBefore(validaLoginCoordenador)
 export class DocumentosController {
   @Get("/")
   @OpenAPI({

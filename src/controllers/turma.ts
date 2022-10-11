@@ -6,10 +6,12 @@ import {
   Param,
   Post,
   Put,
+  UseBefore,
 } from "routing-controllers";
 import { OpenAPI, ResponseSchema } from "routing-controllers-openapi";
 import { Turma } from "../entities/turma";
 import methTurma from "../methods/turma";
+import { validaLoginCoordenador } from "../utils/validaLogin";
 
 @JsonController("/turma")
 export class TurmaController {
@@ -33,6 +35,7 @@ export class TurmaController {
   }
 
   @Get("/")
+  @UseBefore(validaLoginCoordenador)
   @OpenAPI({
     summary: "Retorna todas as turmas",
     responses: {
@@ -42,10 +45,6 @@ export class TurmaController {
   @ResponseSchema(Turma, { isArray: true })
   getAll() {
     return methTurma.getAll();
-
-    // TO-DO
-    // if (isNull(param) || isEmpty(param))
-    // return methTurma.getBy(param);
   }
 
   @Get("/:id")
@@ -87,6 +86,7 @@ export class TurmaController {
   }
 
   @Delete("/:id")
+  @UseBefore(validaLoginCoordenador)
   @OpenAPI({
     summary: "Deleta uma turma dado seu Id",
     responses: {
@@ -96,16 +96,4 @@ export class TurmaController {
   deleteOne(@Param("id") id: number) {
     return methTurma.deleteOne(id);
   }
-
-  // @Delete("/")
-  // @OpenAPI({
-  //   summary: "Deleta todas turmas",
-  //   description: "Utilizar essa rota com cautela",
-  //   responses: {
-  //     "400": { description: "Erro na requisição" },
-  //   },
-  // })
-  // deleteAll() {
-  //   return methTurma.deleteAll();
-  // }
 }

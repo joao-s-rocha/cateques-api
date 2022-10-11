@@ -6,12 +6,15 @@ import {
   Param,
   Post,
   Put,
+  UseBefore,
 } from "routing-controllers";
 import { OpenAPI, ResponseSchema } from "routing-controllers-openapi";
 import { Usuario } from "../entities/usuario";
 import methUsuario from "../methods/usuario";
+import { validaLoginCoordenador } from "../utils/validaLogin";
 
 @JsonController("/usuario")
+@UseBefore(validaLoginCoordenador)
 export class UsuarioController {
   @Get("/")
   @OpenAPI({
@@ -74,16 +77,4 @@ export class UsuarioController {
   deleteOne(@Param("id") id: number) {
     return methUsuario.deleteOne(id);
   }
-
-  // @Delete("/")
-  // @OpenAPI({
-  //   summary: "Deleta todas turmas",
-  //   description: "Utilizar essa rota com cautela",
-  //   responses: {
-  //     "400": { description: "Erro na requisição" },
-  //   },
-  // })
-  // deleteAll() {
-  //   return methUsuario.deleteAll();
-  // }
 }

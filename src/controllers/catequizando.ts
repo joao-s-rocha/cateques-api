@@ -7,10 +7,12 @@ import {
   Param,
   Post,
   Put,
+  UseBefore,
 } from "routing-controllers";
 import { OpenAPI, ResponseSchema } from "routing-controllers-openapi";
 import { Catequizando } from "../entities/catequizando";
 import methCatequizando from "../methods/catequizando";
+import { validaLoginCoordenador } from "../utils/validaLogin";
 
 @JsonController("/catequizando")
 export class CatequizandoController {
@@ -39,6 +41,7 @@ export class CatequizandoController {
   }
 
   @Post("/")
+  @UseBefore(validaLoginCoordenador)
   @OpenAPI({
     summary: "Insere um Catequizando",
     responses: {
@@ -53,6 +56,7 @@ export class CatequizandoController {
   }
 
   @Put("/:id")
+  @UseBefore(validaLoginCoordenador)
   @OpenAPI({
     summary: "Atualiza um Catequizando",
     description:
@@ -70,6 +74,7 @@ export class CatequizandoController {
   }
 
   @Delete("/:id")
+  @UseBefore(validaLoginCoordenador)
   @OpenAPI({
     summary: "Deleta um Catequizando dado seu Id",
     responses: {
