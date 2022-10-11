@@ -8,7 +8,6 @@ import {
 import { db } from "../db";
 import { Usuario } from "../entities/usuario";
 import { CustomError } from "../utils/customError";
-import { formataDataBr } from "../utils/formataDataBr";
 import { validate } from "../utils/validaEntity";
 
 const repository = db.getRepository(Usuario);

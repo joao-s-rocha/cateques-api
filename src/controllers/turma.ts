@@ -17,9 +17,9 @@ import { validaLoginCoordenador } from "../utils/validaLogin";
 export class TurmaController {
   @Get("/usuario/:id")
   @OpenAPI({
-    summary: "Retorna um vetor de turmas dado um usuário",
+    summary: "Retorna um vetor de turmas dado um Usuário",
     description:
-      "Passe o Id do Usuário desejado, e será retornado apenas turmas que pertencem a tal Catequista. Caso o usuário seja um Coordenador, serão retornadas todas as turmas",
+      "Passe o Id do Usuário desejado, e será retornado apenas turmas que pertencem a tal Usuário. Caso o usuário seja um Coordenador, serão retornadas todas as turmas",
     responses: {
       "400": { description: "Erro na requisição" },
     },
@@ -32,6 +32,25 @@ export class TurmaController {
   })
   getByCatequista(@Param("id") id: number) {
     return methTurma.getByCatequista(id);
+  }
+
+  @Get("/catequizando/:id")
+  @OpenAPI({
+    summary: "Retorna um vetor de turmas dado um Catequizando",
+    description:
+      "Passe o Id do Catequizando desejado, e será retornado apenas turmas que pertencem a tal Catequizando",
+    responses: {
+      "400": { description: "Erro na requisição" },
+    },
+  })
+  @ResponseSchema(Turma, {
+    isArray: true,
+    contentType: "application/json",
+    description: "Uma lista de turmas",
+    statusCode: "200",
+  })
+  getByCatequizando(@Param("id") id: number) {
+    return methTurma.getByCatequizando(id);
   }
 
   @Get("/")
