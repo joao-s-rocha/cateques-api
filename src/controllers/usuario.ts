@@ -14,9 +14,9 @@ import methUsuario from "../methods/usuario";
 import { validaLoginCoordenador } from "../utils/validaLogin";
 
 @JsonController("/usuario")
-@UseBefore(validaLoginCoordenador)
 export class UsuarioController {
   @Get("/")
+  @UseBefore(validaLoginCoordenador)
   @OpenAPI({
     summary: "Retorna todos os usuários",
     responses: {
@@ -41,6 +41,7 @@ export class UsuarioController {
   }
 
   @Post("/")
+  @UseBefore(validaLoginCoordenador)
   @OpenAPI({
     summary: "Insere um usuário",
     responses: {
@@ -68,6 +69,7 @@ export class UsuarioController {
   }
 
   @Delete("/:id")
+  @UseBefore(validaLoginCoordenador)
   @OpenAPI({
     summary: "Deleta um usuário dado seu Id",
     responses: {

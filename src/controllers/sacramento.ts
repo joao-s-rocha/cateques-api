@@ -14,7 +14,6 @@ import methSacramento from "../methods/sacramento";
 import { validaLoginCoordenador } from "../utils/validaLogin";
 
 @JsonController("/sacramento")
-@UseBefore(validaLoginCoordenador)
 export class SacramentoController {
   @Get("/")
   @OpenAPI({
@@ -54,6 +53,7 @@ export class SacramentoController {
   }
 
   @Post("/:id")
+  @UseBefore(validaLoginCoordenador)
   @OpenAPI({
     summary: "Insere um Sacramento",
     description: "Informe o Id do Catequizando que receberá o Sacramento",
@@ -67,6 +67,7 @@ export class SacramentoController {
   }
 
   @Put("/:id")
+  @UseBefore(validaLoginCoordenador)
   @OpenAPI({
     summary: "Atualiza um Sacramento",
     description:
@@ -81,6 +82,7 @@ export class SacramentoController {
   }
 
   @Delete("/:id")
+  @UseBefore(validaLoginCoordenador)
   @OpenAPI({
     summary: "Deleta um Sacramento dado seu Id",
     responses: {

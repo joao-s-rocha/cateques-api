@@ -2,3 +2,4 @@ node_modules
 db.ts
 package-lock.json
 todo.txt
+.env

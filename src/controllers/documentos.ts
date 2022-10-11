@@ -14,7 +14,6 @@ import methDocumentos from "../methods/documentos";
 import { validaLoginCoordenador } from "../utils/validaLogin";
 
 @JsonController("/documentos")
-@UseBefore(validaLoginCoordenador)
 export class DocumentosController {
   @Get("/")
   @OpenAPI({
@@ -54,6 +53,7 @@ export class DocumentosController {
   }
 
   @Post("/:id")
+  @UseBefore(validaLoginCoordenador)
   @OpenAPI({
     summary: "Insere um Documento",
     description: "Informe o Id do Catequizando que receberá o Documento",
@@ -67,6 +67,7 @@ export class DocumentosController {
   }
 
   @Put("/:id")
+  @UseBefore(validaLoginCoordenador)
   @OpenAPI({
     summary: "Atualiza um Documento",
     description:
@@ -81,6 +82,7 @@ export class DocumentosController {
   }
 
   @Delete("/:id")
+  @UseBefore(validaLoginCoordenador)
   @OpenAPI({
     summary: "Deleta um Documento dado seu Id",
     responses: {

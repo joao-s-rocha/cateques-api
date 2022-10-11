@@ -1,8 +1,16 @@
-import { BodyParam, Delete, JsonController, Post } from "routing-controllers";
+import {
+  BodyParam,
+  Delete,
+  JsonController,
+  Post,
+  UseBefore,
+} from "routing-controllers";
 import { OpenAPI } from "routing-controllers-openapi";
 import methTurmaCatequizando from "../methods/turmaCatequizando";
+import { validaLoginCoordenador } from "../utils/validaLogin";
 
 @JsonController("/turmaCatequizando")
+@UseBefore(validaLoginCoordenador)
 export class TurmaCatequizandoController {
   @Post("/")
   @OpenAPI({

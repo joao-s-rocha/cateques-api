@@ -54,7 +54,6 @@ export class TurmaController {
   }
 
   @Get("/")
-  @UseBefore(validaLoginCoordenador)
   @OpenAPI({
     summary: "Retorna todas as turmas",
     responses: {
@@ -79,6 +78,7 @@ export class TurmaController {
   }
 
   @Post("/")
+  @UseBefore(validaLoginCoordenador)
   @OpenAPI({
     summary: "Insere uma turma",
     responses: {
@@ -91,6 +91,7 @@ export class TurmaController {
   }
 
   @Put("/:id")
+  @UseBefore(validaLoginCoordenador)
   @OpenAPI({
     summary: "Atualiza uma turma",
     description:

@@ -19,6 +19,9 @@ import { SacramentoController } from "./controllers/sacramento";
 import { DocumentosController } from "./controllers/documentos";
 import { TurmaCatequizandoController } from "./controllers/turmaCatequizando";
 import { Login } from "./controllers/login";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const routingControllersOptions = {
   controllers: [
