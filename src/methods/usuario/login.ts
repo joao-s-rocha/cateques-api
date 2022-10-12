@@ -14,8 +14,6 @@ export async function login(params: any) {
     throw new CustomError(404, "Login ou senha inválidos");
   }
 
-  console.log(process.env.USUARIO_PADRAO);
-
   if (login == process.env.USUARIO_PADRAO && senha == process.env.SENHA_PADRAO)
     return {
       token: jwt.sign(
@@ -39,5 +37,5 @@ export async function login(params: any) {
     { expiresIn: "8h" }
   );
 
-  return { token };
+  return { id_usuario: usuario.id, token };
 }
