@@ -53,7 +53,22 @@ export class TurmaController {
     return methTurma.getByCatequizando(id);
   }
 
+  @Get("/completo/:id")
+  @UseBefore(validaLoginCoordenador)
+  @OpenAPI({
+    summary:
+      "Retorna uma turma, com seus respectivos Catequistas e Catequizandos",
+    responses: {
+      "400": { description: "Erro na requisição" },
+    },
+  })
+  @ResponseSchema(Turma, { isArray: true })
+  getAllCompleto(@Param("id") id: number) {
+    return methTurma.getOneCompleto(id);
+  }
+
   @Get("/")
+  @UseBefore(validaLoginCoordenador)
   @OpenAPI({
     summary: "Retorna todas as turmas",
     responses: {

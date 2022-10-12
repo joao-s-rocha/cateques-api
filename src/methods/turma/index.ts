@@ -7,6 +7,7 @@ import { deleteAll } from "./deleteAll";
 import { deleteOne } from "./deleteOne";
 import { getByCatequista } from "./getByCatequista";
 import { getByCatequizando } from "./getByCatequizando";
+import { getOneCompleto } from "./getOneCompleto";
 
 export default {
   getOne,
@@ -17,4 +18,5 @@ export default {
   deleteOne,
   getByCatequista,
   getByCatequizando,
+  getOneCompleto,
 };
