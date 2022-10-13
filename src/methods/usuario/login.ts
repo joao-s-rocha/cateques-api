@@ -14,13 +14,18 @@ export async function login(params: any) {
     throw new CustomError(404, "Login ou senha inválidos");
   }
 
-  if (login == process.env.USUARIO_PADRAO && senha == process.env.SENHA_PADRAO)
+  if (
+    login == process.env.USUARIO_PADRAO &&
+    senha == process.env.SENHA_PADRAO
+  ) {
     return {
+      id_usuario: 0,
       token: jwt.sign(
         { tipo: "COORDENADOR", id: 0 },
         process.env.JWT_KEY ?? ""
       ),
     };
+  }
 
   const usuario = await repository.findOneBy({ login });
 
