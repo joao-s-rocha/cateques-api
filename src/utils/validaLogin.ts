@@ -16,8 +16,6 @@ export class validaLoginCoordenador implements ExpressMiddlewareInterface {
   async use(req: any, res: any, next: any) {
     const { authorization } = req.headers;
 
-    console.log(authorization);
-
     if (!authorization) throw new CustomError(400, "Token não encontrado");
 
     const token = authorization.split(" ")[1];

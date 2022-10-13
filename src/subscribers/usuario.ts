@@ -19,15 +19,15 @@ export class PostSubscriber implements EntitySubscriberInterface<Usuario> {
   }
 
   async beforeInsert(event: InsertEvent<Usuario>) {
-    if (!isEmpty(event.entity.tipo) && event.entity.tipo === "COORDENADOR") {
-      const coordenador = await repository.findBy({ tipo: "COORDENADOR" });
+    // if (!isEmpty(event.entity.tipo) && event.entity.tipo === "COORDENADOR") {
+    //   const coordenador = await repository.findBy({ tipo: "COORDENADOR" });
 
-      if (
-        !(isEmpty(coordenador) || isNull(coordenador)) &&
-        event.entity.tipo === "COORDENADOR"
-      )
-        throw new CustomError(400, "Coordenador já cadastrado");
-    }
+    //   if (
+    //     !(isEmpty(coordenador) || isNull(coordenador)) &&
+    //     event.entity.tipo === "COORDENADOR"
+    //   )
+    //     throw new CustomError(400, "Coordenador já cadastrado");
+    // }
     await validate(event.entity);
   }
 
