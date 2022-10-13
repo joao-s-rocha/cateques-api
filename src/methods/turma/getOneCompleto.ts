@@ -53,8 +53,6 @@ export async function getOneCompleto(id: number) {
     turma.catequizando = finalCatequizandos;
     turma.catequistas = finalCatequistas;
 
-    console.log(turma);
-
     return turma;
   } catch (err: any) {
     throw new CustomError(400, "Erro na busca", err);
