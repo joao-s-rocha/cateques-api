@@ -1,4 +1,5 @@
 import {
+  Body,
   BodyParam,
   Delete,
   JsonController,
@@ -36,10 +37,7 @@ export class TurmaCatequistaController {
       "400": { description: "Erro na requisição" },
     },
   })
-  delete(
-    @BodyParam("turmaId", { required: true }) turmaId: number,
-    @BodyParam("usuarioId", { required: true }) usuarioId: number
-  ) {
-    return methTurmaCatequista.deleteOne(turmaId, usuarioId);
+  delete(@Body() params: any) {
+    return methTurmaCatequista.deleteOne(params);
   }
 }
