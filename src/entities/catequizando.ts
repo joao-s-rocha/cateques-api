@@ -51,13 +51,13 @@ export class Catequizando {
   @IsOptional()
   estado_civil!: string;
 
-  @Column("varchar", { length: 13 })
+  @Column("varchar", { length: 16 })
   @IsString({ message: "Este campo recebe uma string" })
   @MaxLength(13, { message: "Tamanho máximo de 13 caracteres" })
   @IsNotEmpty({ message: "Este campo não pode estar vazio" })
   telefone_1!: string;
 
-  @Column("varchar", { length: 13 })
+  @Column("varchar", { length: 16 })
   @IsString({ message: "Este campo recebe uma string" })
   @MaxLength(13, { message: "Tamanho máximo de 13 caracteres" })
   @IsOptional()
