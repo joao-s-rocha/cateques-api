@@ -19,8 +19,8 @@ enum SimNao {
 }
 
 enum Sexo {
-  MULHER = "M",
-  HOMEM = "H",
+  MASCULINO = "M",
+  FEMININO = "F",
 }
 
 enum EstadoCivil {
