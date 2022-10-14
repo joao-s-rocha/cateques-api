@@ -1,4 +1,4 @@
-import { isNull } from "lodash";
+import { isEmpty, isNull } from "lodash";
 import { db } from "../../db";
 import { Turma } from "../../entities/turma";
 import { TurmaCatequista } from "../../entities/turmaCatequista";
@@ -11,6 +11,10 @@ const repTurma = db.getRepository(Turma);
 
 export async function deleteOne(body: any) {
   const { usuarioId, turmaId } = body;
+
+  if (!usuarioId || !turmaId)
+    throw new CustomError(400, "Requisição incompleta");
+
   const usuario = await repUsuario.findOneBy({ id: usuarioId });
   const turma = await repTurma.findOneBy({ id: turmaId });
 
