@@ -189,7 +189,7 @@ export class PostSubscriber implements EntitySubscriberInterface<Sacramento> {
       )
         throw new CustomError(
           500,
-          "Eucaristia não pode receber madrinha ou padrinho"
+          "Eucaristia não pode receber madrinha/padrinho"
         );
     }
 
