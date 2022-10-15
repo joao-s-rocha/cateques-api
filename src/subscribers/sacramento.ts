@@ -1,4 +1,4 @@
-import { findIndex, isNull } from "lodash";
+import { findIndex, isEmpty, isNull } from "lodash";
 import {
   EntitySubscriberInterface,
   EventSubscriber,
@@ -14,6 +14,7 @@ import { dataBrToDate } from "../utils/dataBrToDate";
 import { validarCompletoDataBr } from "../utils/validarCompletoDatabBr";
 import { Documentos } from "../entities/documentos";
 import { putOne } from "../methods/catequizando/putOne";
+import { Login } from "../controllers/login";
 
 const repository = db.getRepository(Sacramento);
 const repDocumentos = db.getRepository(Documentos);
@@ -22,13 +23,16 @@ const repCatequizando = db.getRepository(Catequizando);
 function procuraSacramentoData(
   sacramentos: Sacramento[],
   tipo: string,
-  data_inicio: Date
+  data_inicio: Date,
+  data_fechamento: Date
 ): number {
   return findIndex(sacramentos, function (s) {
     return (
       s.tipo_sacramento == tipo &&
       ((!isNull(s.data_fechamento) && s.data_fechamento <= data_inicio) ||
-        isNull(s.data_fechamento))
+        (isNull(s.data_fechamento) &&
+          isEmpty(data_fechamento) &&
+          s.data_inicio <= data_inicio))
     );
   });
 }
@@ -42,7 +46,8 @@ function procuraSacramento(sacramentos: Sacramento[], tipo: string): number {
 async function validaSacramento(
   tipo: string,
   catequizando: Catequizando,
-  data_inicio: Date
+  data_inicio: Date,
+  data_fechamento: Date
 ): Promise<string> {
   if (tipo === "E") {
     const documentos = await repDocumentos.findOne({
@@ -70,8 +75,18 @@ async function validaSacramento(
 
   if (atual > -1) return "Este sacramento já existe para o Catequizando";
   else {
-    const e = procuraSacramentoData(sacramentos, "E", data_inicio);
-    const b = procuraSacramentoData(sacramentos, "B", data_inicio);
+    const e = procuraSacramentoData(
+      sacramentos,
+      "E",
+      data_inicio,
+      data_fechamento
+    );
+    const b = procuraSacramentoData(
+      sacramentos,
+      "B",
+      data_inicio,
+      data_fechamento
+    );
 
     switch (tipo) {
       case "E":
@@ -120,7 +135,8 @@ export class PostSubscriber implements EntitySubscriberInterface<Sacramento> {
     const message: string = await validaSacramento(
       sac.tipo_sacramento,
       sac.catequizando,
-      event.entity.data_inicio
+      event.entity.data_inicio,
+      event.entity.data_fechamento
     );
 
     if (!(message == "")) throw new CustomError(500, message);
