@@ -19,8 +19,8 @@ enum SimNao {
 }
 
 enum Sexo {
-  MULHER = "M",
-  HOMEM = "H",
+  MASCULINO = "M",
+  FEMININO = "F",
 }
 
 enum EstadoCivil {
@@ -51,15 +51,15 @@ export class Catequizando {
   @IsOptional()
   estado_civil!: string;
 
-  @Column("varchar", { length: 13 })
+  @Column("varchar", { length: 16 })
   @IsString({ message: "Este campo recebe uma string" })
-  @MaxLength(13, { message: "Tamanho máximo de 13 caracteres" })
+  @MaxLength(16, { message: "Tamanho máximo de 16 caracteres" })
   @IsNotEmpty({ message: "Este campo não pode estar vazio" })
   telefone_1!: string;
 
-  @Column("varchar", { length: 13 })
+  @Column("varchar", { length: 16 })
   @IsString({ message: "Este campo recebe uma string" })
-  @MaxLength(13, { message: "Tamanho máximo de 13 caracteres" })
+  @MaxLength(16, { message: "Tamanho máximo de 16 caracteres" })
   @IsOptional()
   telefone_2!: string;
 
