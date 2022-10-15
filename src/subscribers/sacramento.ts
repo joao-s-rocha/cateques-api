@@ -27,8 +27,8 @@ function procuraSacramentoData(
   return findIndex(sacramentos, function (s) {
     return (
       s.tipo_sacramento == tipo &&
-      !isNull(s.data_fechamento) &&
-      s.data_fechamento <= data_inicio
+      ((!isNull(s.data_fechamento) && s.data_fechamento <= data_inicio) ||
+        isNull(s.data_fechamento))
     );
   });
 }
