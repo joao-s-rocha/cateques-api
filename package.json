@@ -44,6 +44,10 @@
     "dotenv": "^16.0.3",
     "nodemon": "^2.0.19",
     "prettier": "2.7.1",
+<<<<<<< HEAD
     "typeorm-extension": "^2.2.10"
+=======
+    "typeorm-extension": "^2.2.9"
+>>>>>>> 3de259fb031c3bb4c83f232bee9c2e0854210869
   }
 }

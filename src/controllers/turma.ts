@@ -1,3 +1,5 @@
+import { IsOptional } from "class-validator";
+import { isEmpty, isNull } from "lodash";
 import {
   Body,
   Delete,
@@ -6,12 +8,19 @@ import {
   Param,
   Post,
   Put,
+  QueryParams,
   UseBefore,
 } from "routing-controllers";
 import { OpenAPI, ResponseSchema } from "routing-controllers-openapi";
 import { Turma } from "../entities/turma";
 import methTurma from "../methods/turma";
 import { validaLoginCoordenador } from "../utils/validaLogin";
+
+class GetByTurma {
+  dia_semana!: string;
+  hora_inicial!: string;
+  hora_final!: string;
+}
 
 @JsonController("/turma")
 export class TurmaController {
@@ -76,8 +85,12 @@ export class TurmaController {
     },
   })
   @ResponseSchema(Turma, { isArray: true })
-  getAll() {
-    return methTurma.getAll();
+  getAll(@QueryParams() query: GetByTurma) {
+    if (isEmpty(query) || isNull(query)) {
+      return methTurma.getAll();
+    }
+
+    return methTurma.getBy(query);
   }
 
   @Get("/:id")
