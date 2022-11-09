@@ -1,9 +1,10 @@
 import "reflect-metadata";
 import express from "express";
-import { db } from "./db";
+import { db, optionsDataSource } from "./db";
 import bodyParser from "body-parser";
 import path from "path";
 import cors from "cors";
+import { createDatabase, createMySQLDatabase } from "typeorm-extension";
 
 import { validationMetadatasToSchemas } from "class-validator-jsonschema";
 import { routingControllersToSpec } from "routing-controllers-openapi";
@@ -37,11 +38,18 @@ const routingControllersOptions = {
   routePrefix: "/api",
 };
 
-db.initialize()
-  .then(() => {
-    console.log("Catequese inicializado com sucesso");
-  })
-  .catch((error) => console.log(error));
+(async () => {
+  await createMySQLDatabase({
+    ifNotExist: true,
+    options: optionsDataSource,
+  });
+
+  db.initialize()
+    .then(() => {
+      console.log("Catequese inicializado com sucesso");
+    })
+    .catch((error) => console.log(error));
+})();
 
 const app = express();
 
