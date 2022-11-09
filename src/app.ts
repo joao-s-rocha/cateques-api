@@ -1,9 +1,10 @@
 import "reflect-metadata";
 import express from "express";
-import { db } from "./db";
+import { db, options } from "./db";
 import bodyParser from "body-parser";
 import path from "path";
 import cors from "cors";
+import { createDatabase } from "typeorm-extension";
 
 import { validationMetadatasToSchemas } from "class-validator-jsonschema";
 import { routingControllersToSpec } from "routing-controllers-openapi";
@@ -36,6 +37,10 @@ const routingControllersOptions = {
   ],
   routePrefix: "/api",
 };
+
+// createDatabase({
+//   options,
+// });
 
 db.initialize()
   .then(() => {
