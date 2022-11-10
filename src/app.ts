@@ -4,7 +4,11 @@ import { db, optionsDataSource } from "./db";
 import bodyParser from "body-parser";
 import path from "path";
 import cors from "cors";
-import { createDatabase, createMySQLDatabase } from "typeorm-extension";
+import {
+  createDatabase,
+  createMySQLDatabase,
+  createSimpleMySQLConnection,
+} from "typeorm-extension";
 
 import { validationMetadatasToSchemas } from "class-validator-jsonschema";
 import { routingControllersToSpec } from "routing-controllers-openapi";

@@ -39,7 +39,13 @@ export class Sacramento {
   @IsNotEmpty()
   tipo_sacramento!: string;
 
-  @Column("varchar", { length: 120, nullable: true })
+  @Column({
+    type: "varchar",
+    length: 120,
+    charset: "utf8mb4",
+    collation: "utf8mb4_0900_as_cs",
+    nullable: true,
+  })
   @MaxLength(120, {
     message: "Tamanho máximo para esse campo é de 120 caracteres",
   })
@@ -47,7 +53,13 @@ export class Sacramento {
   @IsOptional()
   nome_padrinho!: string;
 
-  @Column("varchar", { length: 120, nullable: true })
+  @Column({
+    type: "varchar",
+    length: 120,
+    charset: "utf8mb4",
+    collation: "utf8mb4_0900_as_cs",
+    nullable: true,
+  })
   @MaxLength(120, {
     message: "Tamanho máximo para esse campo é de 120 caracteres",
   })

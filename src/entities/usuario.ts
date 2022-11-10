@@ -24,7 +24,13 @@ export class Usuario {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @Column({ type: "varchar", length: 30, nullable: false })
+  @Column({
+    type: "varchar",
+    length: 30,
+    charset: "utf8mb4",
+    collation: "utf8mb4_0900_as_cs",
+    nullable: false,
+  })
   @MaxLength(30, {
     message: "Tamanho máximo para esse campo é de 30 caracteres",
   })
@@ -33,7 +39,13 @@ export class Usuario {
   @IsNotEmpty({ message: "Este campo deve receber um valor" })
   login!: string;
 
-  @Column({ type: "varchar", length: 120, nullable: false })
+  @Column({
+    type: "varchar",
+    length: 120,
+    charset: "utf8mb4",
+    collation: "utf8mb4_0900_as_cs",
+    nullable: false,
+  })
   @MaxLength(120, {
     message: "Tamanho máximo para esse campo é de 120 caracteres",
   })
@@ -53,7 +65,12 @@ export class Usuario {
   @IsNotEmpty()
   tipo!: string;
 
-  @Column("varchar", { length: 120 })
+  @Column({
+    type: "varchar",
+    length: 120,
+    charset: "utf8mb4",
+    collation: "utf8mb4_0900_as_cs",
+  })
   @IsString({ message: "Este campo recebe uma string" })
   @MaxLength(120, {
     message: "Tamanho máximo para esse campo é de 120 caracteres",

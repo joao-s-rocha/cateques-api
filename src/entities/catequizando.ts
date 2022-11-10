@@ -35,7 +35,12 @@ export class Catequizando {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @Column("varchar", { length: 120 })
+  @Column({
+    type: "varchar",
+    length: 120,
+    charset: "utf8mb4",
+    collation: "utf8mb4_0900_as_cs",
+  })
   @IsString({ message: "Este campo recebe uma string" })
   @MaxLength(120, { message: "Tamanho máximo de 120 caracteres" })
   @IsNotEmpty({ message: "Este campo não pode estar vazio" })
@@ -51,13 +56,13 @@ export class Catequizando {
   @IsOptional()
   estado_civil!: string;
 
-  @Column("varchar", { length: 16 })
+  @Column("varchar", { length: 16, nullable: true })
   @IsString({ message: "Este campo recebe uma string" })
   @MaxLength(16, { message: "Tamanho máximo de 16 caracteres" })
   @IsNotEmpty({ message: "Este campo não pode estar vazio" })
   telefone_1!: string;
 
-  @Column("varchar", { length: 16 })
+  @Column("varchar", { length: 16, nullable: true })
   @IsString({ message: "Este campo recebe uma string" })
   @MaxLength(16, { message: "Tamanho máximo de 16 caracteres" })
   @IsOptional()
