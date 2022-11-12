@@ -1,4 +1,10 @@
-import { IsOptional } from "class-validator";
+import {
+  IsEnum,
+  IsInt,
+  IsNotEmpty,
+  IsOptional,
+  IsString,
+} from "class-validator";
 import { isEmpty, isNull } from "lodash";
 import {
   Body,
@@ -8,6 +14,7 @@ import {
   Param,
   Post,
   Put,
+  QueryParam,
   QueryParams,
   UseBefore,
 } from "routing-controllers";
@@ -16,10 +23,57 @@ import { Turma } from "../entities/turma";
 import methTurma from "../methods/turma";
 import { validaLoginCoordenador } from "../utils/validaLogin";
 
+enum DiaSemana {
+  DOMINGO = "DOMINGO",
+  SEGUNDA = "SEGUNDA",
+  TERCA = "TERCA",
+  QUARTA = "QUARTA",
+  QUINTA = "QUINTA",
+  SEXTA = "SEXTA",
+  SABADO = "SABADO",
+}
+
+enum Status {
+  ATIVO = "ATIVO",
+  INATIVO = "INATIVO",
+}
+
 class GetByTurma {
-  dia_semana!: string;
+  @IsString({ message: "Este campo deve receber uma String" })
+  @IsOptional()
+  descricao!: string;
+
+  @IsEnum(DiaSemana, { message: "Este campo deve receber um dia da semana" })
+  @IsOptional()
+  dia_semana!: DiaSemana;
+
+  @IsEnum(Status, { message: "Este campo deve receber Ativo ou Inativo" })
+  @IsOptional()
+  status!: Status;
+
+  @IsString({ message: "Este campo deve receber uma String" })
+  @IsOptional()
   hora_inicial!: string;
+
+  @IsString({ message: "Este campo deve receber uma String" })
+  @IsOptional()
   hora_final!: string;
+
+  @IsString({ message: "Este campo deve receber uma String" })
+  @IsOptional()
+  data_cad_inicial!: string;
+
+  @IsString({ message: "Este campo deve receber uma String" })
+  @IsOptional()
+  data_cad_final!: string;
+
+  @IsString({ message: "Este campo deve receber uma String" })
+  @IsOptional()
+  data_conclusao_inicial!: string;
+
+  @IsString({ message: "Este campo deve receber uma String" })
+  @IsOptional()
+  data_conclusao_final!: string;
 }
 
 @JsonController("/turma")
@@ -79,7 +133,7 @@ export class TurmaController {
   @Get("/")
   @UseBefore(validaLoginCoordenador)
   @OpenAPI({
-    summary: "Retorna todas as turmas",
+    summary: "Retorna todas as turmas caso não informado nenhum filtro",
     responses: {
       "400": { description: "Erro na requisição" },
     },

@@ -5,11 +5,15 @@ import { db } from "../../db";
 import { Turma } from "../../entities/turma";
 import { validarCompletoDataBr } from "../../utils/validarCompletoDatabBr";
 import { dataBrToDate } from "../../utils/dataBrToDate";
+import { getOneCompleto } from "./getOneCompleto";
 
 const repository = db.getRepository(Turma);
 
 export async function getBy(where: any) {
+  let turmasCompletas: any = [];
+
   let {
+    descricao,
     dia_semana,
     hora_inicial,
     hora_final,
@@ -19,8 +23,6 @@ export async function getBy(where: any) {
     data_cad_inicial,
     data_cad_final,
   } = where;
-
-  console.log(where);
 
   const hora =
     hora_inicial && hora_final
@@ -68,6 +70,7 @@ export async function getBy(where: any) {
       : null;
 
   where = {
+    ...(descricao && { descricao: Like("%" + descricao + "%") }),
     ...(dia_semana && { dia_semana: Like("%" + dia_semana + "%") }),
     ...(hora && hora),
     ...(status && { status }),
@@ -75,15 +78,21 @@ export async function getBy(where: any) {
     ...(data_cad && data_cad),
   };
 
-  console.log(where);
-
   try {
-    return await repository.find({
+    const turmas = await repository.find({
       where,
       order: {
         dia_semana: "ASC",
       },
     });
+
+    if (isEmpty(turmas)) return [];
+
+    for (const thisTurma of turmas) {
+      turmasCompletas.push(await getOneCompleto(thisTurma.id));
+    }
+
+    return turmasCompletas;
   } catch (err: any) {
     throw new CustomError(400, "Erro na busca", err);
   }
