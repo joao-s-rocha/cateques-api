@@ -36,6 +36,9 @@ export async function getBy(where: any) {
     validarCompletoDataBr(data_conclusao_inicial.toString())
   ) {
     data_conclusao_inicial = dataBrToDate(data_conclusao_inicial);
+    data_conclusao_inicial = new Date(
+      (data_conclusao_inicial as Date).setUTCHours(0, 0, 0, 0)
+    );
   }
 
   if (
@@ -43,14 +46,23 @@ export async function getBy(where: any) {
     validarCompletoDataBr(data_conclusao_final.toString())
   ) {
     data_conclusao_final = dataBrToDate(data_conclusao_final);
+    data_conclusao_final = new Date(
+      (data_conclusao_final as Date).setUTCHours(23, 59, 59, 0)
+    );
   }
 
   if (data_cad_inicial && validarCompletoDataBr(data_cad_inicial.toString())) {
     data_cad_inicial = dataBrToDate(data_cad_inicial);
+    data_cad_inicial = new Date(
+      (data_cad_inicial as Date).setUTCHours(0, 0, 0, 0)
+    );
   }
 
   if (data_cad_final && validarCompletoDataBr(data_cad_final.toString())) {
     data_cad_final = dataBrToDate(data_cad_final);
+    data_cad_final = new Date(
+      (data_cad_final as Date).setUTCHours(23, 59, 59, 0)
+    );
   }
 
   const data_conclusao =

@@ -1,4 +1,5 @@
-import { isArray } from "lodash";
+import { IsDate, IsEnum, IsInt, IsOptional, IsString } from "class-validator";
+import { isArray, isEmpty, isNull } from "lodash";
 import {
   Body,
   Delete,
@@ -7,12 +8,78 @@ import {
   Param,
   Post,
   Put,
+  QueryParams,
   UseBefore,
 } from "routing-controllers";
 import { OpenAPI, ResponseSchema } from "routing-controllers-openapi";
 import { Catequizando } from "../entities/catequizando";
 import methCatequizando from "../methods/catequizando";
 import { validaLoginCoordenador } from "../utils/validaLogin";
+
+enum SimNao {
+  SIM = "S",
+  NAO = "N",
+}
+
+enum Sexo {
+  MASCULINO = "M",
+  FEMININO = "F",
+}
+
+enum EstadoCivil {
+  CASADO = "C",
+  SOLTEIRO = "S",
+  VIUVO = "V",
+  DIVORCIADO = "D",
+}
+
+enum TipoSacramento {
+  EUCARISTIA = "E",
+  CRISMA = "C",
+  BATISMO = "B",
+}
+
+class GetByCatequizando {
+  @IsInt()
+  @IsOptional()
+  id_catequizando!: Catequizando;
+
+  @IsString({ message: "Este campo recebe uma string" })
+  @IsOptional()
+  nome!: string;
+
+  @IsEnum(SimNao, { message: "Enum não correspondente" })
+  @IsOptional()
+  todos_sac!: string;
+
+  @IsEnum(EstadoCivil, { message: "Enum não correspondente" })
+  @IsOptional()
+  estado_civil!: string;
+
+  @IsString({ message: "Este campo recebe uma string" })
+  @IsOptional()
+  telefone_1!: string;
+
+  @IsString({ message: "Este campo recebe uma string" })
+  @IsOptional()
+  telefone_2!: string;
+
+  @IsEnum(Sexo, { message: "Enum não correspondente" })
+  @IsOptional()
+  sexo!: string;
+
+  @IsOptional()
+  data_nascimento_inicial!: string;
+
+  @IsOptional()
+  data_nascimento_final!: string;
+
+  @IsOptional()
+  data_cad_inicial!: string;
+
+  @IsOptional()
+  data_cad_final!: string;
+}
 
 @JsonController("/catequizando")
 export class CatequizandoController {
@@ -24,8 +91,12 @@ export class CatequizandoController {
     },
   })
   @ResponseSchema(Catequizando, { isArray: true })
-  getAll() {
-    return methCatequizando.getAll();
+  getAll(@QueryParams() query: GetByCatequizando) {
+    if (isEmpty(query) || isNull(query)) {
+      return methCatequizando.getAll();
+    }
+
+    return methCatequizando.getBy(query);
   }
 
   @Get("/:id")
