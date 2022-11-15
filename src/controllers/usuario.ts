@@ -1,3 +1,5 @@
+import { IsEnum, IsOptional, IsString } from "class-validator";
+import { isEmpty, isNull } from "lodash";
 import {
   Body,
   Delete,
@@ -6,12 +8,44 @@ import {
   Param,
   Post,
   Put,
+  QueryParams,
   UseBefore,
 } from "routing-controllers";
 import { OpenAPI, ResponseSchema } from "routing-controllers-openapi";
 import { Usuario } from "../entities/usuario";
 import methUsuario from "../methods/usuario";
 import { validaLoginCoordenador } from "../utils/validaLogin";
+
+enum TipoUsuario {
+  COORDENADOR = "COORDENADOR",
+  CATEQUISTA = "CATEQUISTA",
+}
+
+class GetByUsuario {
+  @IsString({ message: "Este campo deve receber uma String" })
+  @IsOptional()
+  id_usuario!: string;
+
+  @IsString({ message: "Este campo deve receber uma String" })
+  @IsOptional()
+  login!: string;
+
+  @IsString({ message: "Este campo deve receber uma String" })
+  @IsOptional()
+  nome!: string;
+
+  @IsEnum(TipoUsuario, { message: "Este campo deve receber um dia da semana" })
+  @IsOptional()
+  tipo!: string;
+
+  @IsString({ message: "Este campo deve receber uma String" })
+  @IsOptional()
+  data_cad_inicial!: string;
+
+  @IsString({ message: "Este campo deve receber uma String" })
+  @IsOptional()
+  data_cad_final!: string;
+}
 
 @JsonController("/usuario")
 export class UsuarioController {
@@ -24,8 +58,12 @@ export class UsuarioController {
     },
   })
   @ResponseSchema(Usuario, { isArray: true })
-  getAll() {
-    return methUsuario.getAll();
+  getAll(@QueryParams() query: GetByUsuario) {
+    if (isEmpty(query) || isNull(query)) {
+      return methUsuario.getAll();
+    }
+
+    return methUsuario.getBy(query);
   }
 
   @Get("/:id")
