@@ -83,22 +83,24 @@ Pronto, tudo instalado corretamente.
 Para conseguirmos fazer nosso projeto se conectar com o SGBD, devemos adicionar dentro da pasta `/src` um arquivo chamado `db.ts` nele teremos a seguinte estrutura:
 
 ```typescript
-import { DataSource } from "typeorm";
+import { DataSource, DataSourceOptions } from "typeorm";
 
-export const db = new DataSource({
+export const optionsDataSource: DataSourceOptions = {
   type: "mysql",
-  host: "127.0.0.1", //IP de onde se encontrará seu Banco
-  port: 3306, //Porta que está utilizando
-  username: "root", //O user
-  password: "masterkey", //Sua senha para este user
-  database: "catequese", //Manter o database com esse nome
+  host: "127.0.0.1",
+  port: 3306,
+  username: "root",
+  password: "masterkey",
+  database: "catequese",
   entities: ["src/entities/*.ts"],
   subscribers: ["src/subscribers/*.ts"],
   logging: false,
   synchronize: true,
-  charset: "utf8mb4",
+  charset: "latin1",
   timezone: "-04:00",
-});
+};
+
+export const db = new DataSource(optionsDataSource);
 ```
 
 As opções para conexão do banco estão ok, o que bastará agora é você **criar um banco vazio** no mesmo host e porta com o mesmo user. Este banco deve possuir o mesmo nome do campo `database` do arquivo acima, neste exemplo "catequese".
