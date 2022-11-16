@@ -141,6 +141,6 @@ Isso possivelmente corrija o erro.
 
 Foi criado um arquivo em _swagger_ para consultar facilmente a estrutura das requisições.
 
-Para acessa-lo basta entrarmos na URL: http://localhost:3000/docs/ com a API já inicializado com o comando `npm run dev`.
+Para acessa-lo basta entrarmos na URL: http://localhost:3001/docs/ com a API já inicializado com o comando `npm run dev`.
 
 [Voltar ao início](#api-catequese)
