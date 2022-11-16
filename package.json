@@ -44,6 +44,7 @@
     "dotenv": "^16.0.3",
     "nodemon": "^2.0.19",
     "prettier": "2.7.1",
+    "ts-node": "^10.9.1",
     "typeorm-extension": "^2.2.10"
   }
 }
