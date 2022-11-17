@@ -14,11 +14,9 @@ import { dataBrToDate } from "../utils/dataBrToDate";
 import { validarCompletoDataBr } from "../utils/validarCompletoDatabBr";
 import { Documentos } from "../entities/documentos";
 import { putOne } from "../methods/catequizando/putOne";
-import { Login } from "../controllers/login";
 
 const repository = db.getRepository(Sacramento);
 const repDocumentos = db.getRepository(Documentos);
-const repCatequizando = db.getRepository(Catequizando);
 
 function procuraSacramentoData(
   sacramentos: Sacramento[],

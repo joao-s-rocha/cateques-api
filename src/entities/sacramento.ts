@@ -13,7 +13,9 @@ import {
   JoinColumn,
   ManyToOne,
   PrimaryGeneratedColumn,
+  Unique,
 } from "typeorm";
+import catequizando from "../methods/catequizando";
 import { Catequizando } from "./catequizando";
 
 enum TipoSacramento {
@@ -23,6 +25,7 @@ enum TipoSacramento {
 }
 
 @Entity({ name: "sacramento" })
+@Unique("UQ_SACRAMENTO", ["catequizando", "tipo_sacramento"])
 export class Sacramento {
   @PrimaryGeneratedColumn()
   id!: number;

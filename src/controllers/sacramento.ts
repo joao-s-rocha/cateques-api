@@ -77,7 +77,7 @@ export class SacramentoController {
     },
   })
   @ResponseSchema(Sacramento)
-  putOne(@Param("id") id: number, @Body({ validate: false }) sac: Sacramento) {
+  putOne(@Param("id") id: number, @Body() sac: any) {
     return methSacramento.putOne(id, sac);
   }
 

@@ -15,7 +15,7 @@ export async function postOne(id: number, sac: Sacramento) {
 
     sac.catequizando = cat;
 
-    return repository.save(repository.create(sac));
+    return await repository.save(repository.create(sac));
   } catch (err: any) {
     throw new CustomError(400, "Registro inválido", err);
   }
