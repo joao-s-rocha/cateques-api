@@ -90,7 +90,7 @@ export const baseOptions: DataSourceOptions = {
   host: "127.0.0.1", //IP de onde se encontrará seu Banco
   port: 3306, //Porta que está utilizando
   username: "root", //O user
-  password: "E7@!dcq/", //Sua senha para este user
+  password: "masterkey", //Sua senha para este user
   database: "catequese", //Manter o database com esse nome
   entities: ["src/entities/*.ts"],
   logging: false,
